@@ -1,0 +1,13 @@
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.exe.config
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.exe
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.pdb
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.csprojResolveAssemblyReference.cache
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaDivisaoUpload.resources
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Properties.Resources.resources
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.csproj.GenerateResource.Cache
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.exe
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.pdb
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.SelecionarArquivoCriptografar.resources
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.SelecionarArquivoDesincriptar.resources
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Home.resources
+D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaUpload.resources
