@@ -268,8 +268,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Upload.cshtml" />
+    <Content Include="Views\Home\Erro.cshtml" />
+    <Content Include="Views\Home\Decriptar.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\downloads\" />
     <Folder Include="App_Data\uploads\" />
   </ItemGroup>
   <ItemGroup>

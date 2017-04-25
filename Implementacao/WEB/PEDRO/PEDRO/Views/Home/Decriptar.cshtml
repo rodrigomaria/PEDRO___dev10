@@ -1,15 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Upload";
+    ViewBag.Title = "Decriptar";
 }
 
-@using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Decriptar", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="row">
         <div class="col-md-4">
             <h2>Upload</h2>
             <h2>@TempData["Sucesso"]</h2>
             <input type="file" name="file" class="open" id="file" /><br>
-            <input type="submit" class="btn btn-toolbar" value="Upload" />
+            <input type="submit" class="btn btn-toolbar" value="Decriptar" />
         </div>
     </div>
 }

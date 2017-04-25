@@ -11,3 +11,16 @@ D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Rég
 D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.SelecionarArquivoDesincriptar.resources
 D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Home.resources
 D:\Google Drive\ADS IFRS 2015\5º Semestre\Desenvolvimento de Sistemas II - Régio Michelin\Projeto\Implementação\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaUpload.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.exe.config
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.exe
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.pdb
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.exe
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.pdb
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.csprojResolveAssemblyReference.cache
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Home.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.SelecionarArquivoCriptografar.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.SelecionarArquivoDesincriptar.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaUpload.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaDivisaoUpload.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Properties.Resources.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.csproj.GenerateResource.Cache
