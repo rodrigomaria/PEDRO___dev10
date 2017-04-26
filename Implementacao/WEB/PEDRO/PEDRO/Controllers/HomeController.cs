@@ -11,7 +11,6 @@ namespace PEDRO.Controllers
 {
     public class HomeController : Controller
     {
-        private string skey;
         private string outputFile;
         private string inputFile;
 
@@ -26,9 +25,9 @@ namespace PEDRO.Controllers
         }
         
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file)
+        public ActionResult Upload(HttpPostedFileBase file, string userKey)
         {
-            if (file.ContentLength > 0)
+            if (file != null && file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName);
                 inputFile = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
@@ -37,14 +36,11 @@ namespace PEDRO.Controllers
 
                 try
                 {
-                    //skey = GenerateKey() + GenerateKey();
-                    skey = "?????:?????????";
-
                     using (RijndaelManaged aes = new RijndaelManaged())
                     {
-                        byte[] key = ASCIIEncoding.UTF8.GetBytes(skey);
+                        byte[] key = ASCIIEncoding.UTF8.GetBytes(userKey);
 
-                        byte[] IV = ASCIIEncoding.UTF8.GetBytes(skey);
+                        byte[] IV = ASCIIEncoding.UTF8.GetBytes(userKey);
 
                         using (FileStream fsCrypt = new FileStream(outputFile, FileMode.Create))
                         {
@@ -63,7 +59,7 @@ namespace PEDRO.Controllers
                         }
                     }
 
-                    TempData["Sucesso"] = "Arquivo encriptado com sucesso!\nSua chave: " + skey;
+                    TempData["Sucesso"] = "Arquivo encriptado com sucesso!";
                     return RedirectToAction("Upload");
                 }
                 catch (Exception ex)
@@ -73,8 +69,12 @@ namespace PEDRO.Controllers
 
                     return RedirectToAction("Erro");
                 }
-            } else
+            }
+            else
+            {
+                TempData["Erro"] = "Selecione um arquivo.";
                 return RedirectToAction("Erro");
+            }
         }
 
         public ActionResult About()
@@ -105,46 +105,53 @@ namespace PEDRO.Controllers
         }
 
         [HttpPost]
-        public ActionResult Decriptar(HttpPostedFileBase file)
+        public ActionResult Decriptar(HttpPostedFileBase file, string userKey)
         {
-            try
+            if (file != null && file.ContentLength > 0)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), fileName);
-                outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "decriptado");
-                skey = "?????:?????????";
-
-                using (RijndaelManaged aes = new RijndaelManaged())
+                try
                 {
-                    byte[] key = ASCIIEncoding.UTF8.GetBytes(skey);
+                    var fileName = Path.GetFileName(file.FileName);
+                    inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), fileName);
+                    outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "decriptado");
 
-                    byte[] IV = ASCIIEncoding.UTF8.GetBytes(skey);
-
-                    using (FileStream fsCrypt = new FileStream(inputFile, FileMode.Open))
+                    using (RijndaelManaged aes = new RijndaelManaged())
                     {
-                        using (FileStream fsOut = new FileStream(outputFile, FileMode.Create))
+                        byte[] key = ASCIIEncoding.UTF8.GetBytes(userKey);
+
+                        byte[] IV = ASCIIEncoding.UTF8.GetBytes(userKey);
+
+                        using (FileStream fsCrypt = new FileStream(inputFile, FileMode.Open))
                         {
-                            using (ICryptoTransform decryptor = aes.CreateDecryptor(key, IV))
+                            using (FileStream fsOut = new FileStream(outputFile, FileMode.Create))
                             {
-                                using (CryptoStream cs = new CryptoStream(fsCrypt, decryptor, CryptoStreamMode.Read))
+                                using (ICryptoTransform decryptor = aes.CreateDecryptor(key, IV))
                                 {
-                                    int data;
-                                    while ((data = cs.ReadByte()) != -1)
-                                        fsOut.WriteByte((byte)data);
+                                    using (CryptoStream cs = new CryptoStream(fsCrypt, decryptor, CryptoStreamMode.Read))
+                                    {
+                                        int data;
+                                        while ((data = cs.ReadByte()) != -1)
+                                            fsOut.WriteByte((byte)data);
+                                    }
                                 }
                             }
                         }
                     }
+
+                    TempData["Sucesso"] = "Arquivo decriptado com sucesso!";
+                    return RedirectToAction("Decriptar");
                 }
+                catch (Exception ex)
+                {
+                    TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
+                            "\n" + ex.Message + "\n" + ex.Data + "\n" + ex.StackTrace;
 
-                TempData["Sucesso"] = "Arquivo decriptado com sucesso!";
-                return RedirectToAction("Decriptar");
+                    return RedirectToAction("Erro");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
-                        "\n" + ex.Message + "\n" + ex.Data + "\n" + ex.StackTrace;
-
+                TempData["Erro"] = "Selecione um arquivo.";
                 return RedirectToAction("Erro");
             }
         }
