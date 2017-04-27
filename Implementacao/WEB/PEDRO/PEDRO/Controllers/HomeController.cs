@@ -72,7 +72,7 @@ namespace PEDRO.Controllers
             }
             else
             {
-                TempData["Erro"] = "Selecione um arquivo.";
+                TempData["Erro"] = "Selecione um arquivo antes de clicar em decriptar.";
                 return RedirectToAction("Erro");
             }
         }
