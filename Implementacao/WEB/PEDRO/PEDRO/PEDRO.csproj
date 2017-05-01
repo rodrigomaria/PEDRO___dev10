@@ -272,6 +272,8 @@
     <Content Include="Views\Home\Upload.cshtml" />
     <Content Include="Views\Home\Erro.cshtml" />
     <Content Include="Views\Home\Decriptar.cshtml" />
+    <Content Include="Views\Home\Dividir.cshtml" />
+    <Content Include="Views\Home\Recuperar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\downloads\" />

@@ -24,3 +24,16 @@ C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPed
 C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaDivisaoUpload.resources
 C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Properties.Resources.resources
 C:\Users\jasilva\Downloads\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.csproj.GenerateResource.Cache
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.exe.config
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.exe
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\bin\Debug\TelasProjetoPedro.pdb
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.csprojResolveAssemblyReference.cache
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Home.resources
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.SelecionarArquivoCriptografar.resources
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.SelecionarArquivoDesincriptar.resources
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaUpload.resources
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.TelaDivisaoUpload.resources
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.Properties.Resources.resources
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.csproj.GenerateResource.Cache
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.exe
+C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\TelasProjetoPedro\TelasProjetoPedro\obj\Debug\TelasProjetoPedro.pdb

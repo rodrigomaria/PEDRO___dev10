@@ -104,6 +104,15 @@ namespace PEDRO.Controllers
             return View();
         }
 
+        public ActionResult Dividir()
+        {
+            return View();
+        }
+        public ActionResult Recuperar()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Decriptar(HttpPostedFileBase file, string userKey)
         {
