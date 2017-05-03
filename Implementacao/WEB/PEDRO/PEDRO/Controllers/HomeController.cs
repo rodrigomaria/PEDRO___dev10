@@ -143,20 +143,27 @@ namespace PEDRO.Controllers
 
             }
             
-            return View();
+            return View("Index");
         }
+
         public ActionResult Recuperar()
         {
-            //using (FileStream recu = new FileStream(desktop + "recu.txt", FileMode.Create))
-            //{
-            //    for (int i = 0; i < partes; i++)
-            //    {
-            //        byte[] bytes = File.ReadAllBytes(desktop + "pt" + i + ".txt");
-            //        recu.Write(bytes, 0, bytes.Length);
-            //    }
-            //}
-
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Recuperar(int? id)
+        {
+            using (FileStream recu = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu"), FileMode.Create))
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i + ".txt"));
+                    recu.Write(bytes, 0, bytes.Length);
+                }
+            }
+
+            return View("Index");
         }
 
         [Authorize]
