@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -19,11 +18,13 @@ namespace PEDRO.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Upload()
         {
             return View();
         }
         
+        [Authorize]
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file, string userKey)
         {
@@ -32,7 +33,7 @@ namespace PEDRO.Controllers
                 var fileName = Path.GetFileName(file.FileName);
                 inputFile = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
                 file.SaveAs(inputFile);
-                outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), DateTime.Now.Ticks.ToString());
+                outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatil");
 
                 try
                 {
@@ -60,7 +61,7 @@ namespace PEDRO.Controllers
                     }
 
                     TempData["Sucesso"] = "Arquivo encriptado com sucesso!";
-                    return RedirectToAction("Upload");
+                    return RedirectToAction("Dividir");
                 }
                 catch (Exception ex)
                 {
@@ -99,20 +100,66 @@ namespace PEDRO.Controllers
             return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
         }
 
+        [Authorize]
         public ActionResult Decriptar()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult Dividir()
         {
             return View();
         }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Dividir(int numDeArqs)
+        {
+            // pasta padrão
+            inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatil");
+            
+            //particiona arquivo por partes
+            byte[] todosOsBytes = System.IO.File.ReadAllBytes(inputFile);
+            int x = 0;
+            int fatia = todosOsBytes.Length / numDeArqs;
+            int sobra = todosOsBytes.Length % numDeArqs;
+
+            for (int i = 0; i < numDeArqs; i++)
+            {
+                using (FileStream file = new FileStream(inputFile + "pt" + i + ".txt", FileMode.Create))
+                {
+                    if (i > 0)
+                    {
+                        file.Write(todosOsBytes, x, fatia);
+                        x += fatia;
+                    }
+                    else
+                    {
+                        file.Write(todosOsBytes, x, fatia + sobra);
+                        x += fatia + sobra;
+                    }
+                }
+
+            }
+            
+            return View();
+        }
         public ActionResult Recuperar()
         {
+            //using (FileStream recu = new FileStream(desktop + "recu.txt", FileMode.Create))
+            //{
+            //    for (int i = 0; i < partes; i++)
+            //    {
+            //        byte[] bytes = File.ReadAllBytes(desktop + "pt" + i + ".txt");
+            //        recu.Write(bytes, 0, bytes.Length);
+            //    }
+            //}
+
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Decriptar(HttpPostedFileBase file, string userKey)
         {

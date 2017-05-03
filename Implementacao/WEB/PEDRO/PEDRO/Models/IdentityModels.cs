@@ -29,5 +29,7 @@ namespace PEDRO.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PEDRO.Models.CloudModel> CloudModels { get; set; }
     }
 }

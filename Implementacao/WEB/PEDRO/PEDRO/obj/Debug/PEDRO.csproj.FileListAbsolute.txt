@@ -408,3 +408,6 @@ C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microso
 C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\jasilva\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.InitialCreate.resources
+C:\Users\jasilva\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csproj.GenerateResource.Cache
+C:\Users\jasilva\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.clouds.resources
