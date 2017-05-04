@@ -411,3 +411,6 @@ C:\Users\Inalda\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microso
 C:\Users\jasilva\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.InitialCreate.resources
 C:\Users\jasilva\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csproj.GenerateResource.Cache
 C:\Users\jasilva\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.clouds.resources
+C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.InitialCreate.resources
+C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.clouds.resources
+C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csproj.GenerateResource.Cache

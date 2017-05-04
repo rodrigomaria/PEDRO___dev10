@@ -127,7 +127,7 @@ namespace PEDRO.Controllers
 
             for (int i = 0; i < numDeArqs; i++)
             {
-                using (FileStream file = new FileStream(inputFile + "pt" + i + ".txt", FileMode.Create))
+                using (FileStream file = new FileStream(inputFile + "pt" + i, FileMode.Create))
                 {
                     if (i > 0)
                     {
@@ -143,7 +143,7 @@ namespace PEDRO.Controllers
 
             }
             
-            return View("Index");
+            return View("Recuperar");
         }
 
         public ActionResult Recuperar()
@@ -158,12 +158,12 @@ namespace PEDRO.Controllers
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i + ".txt"));
+                    byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i));
                     recu.Write(bytes, 0, bytes.Length);
                 }
             }
 
-            return View("Index");
+            return View("Decriptar");
         }
 
         [Authorize]
