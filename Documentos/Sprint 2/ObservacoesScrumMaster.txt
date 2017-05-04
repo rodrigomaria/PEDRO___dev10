@@ -1,0 +1,9 @@
+Ver:
+- senha segura em banco de dados
+- using salt for password
+- https://storj.io/
+
+Observações:
+- diminuir tamanho de senha para encriptar (ver métodos para completar senha)
+- dividir arquivo pelo número de clouds
+

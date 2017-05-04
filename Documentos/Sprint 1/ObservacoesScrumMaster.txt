@@ -1,0 +1,4 @@
+Usuário pode escolher sua chave;
+Escolher onde salvar arq encriptado;
+Trabalhar sempre com bytes na divisão do arquivo;
+"Blockchain".
