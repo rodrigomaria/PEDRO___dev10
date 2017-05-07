@@ -19,14 +19,14 @@ namespace PEDRO.Controllers
         }
 
         [Authorize]
-        public ActionResult Upload()
+        public ActionResult Encriptar()
         {
             return View();
         }
         
         [Authorize]
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file, string userKey)
+        public ActionResult Encriptar(HttpPostedFileBase file, string userKey)
         {
             if (file != null && file.ContentLength > 0)
             {

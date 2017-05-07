@@ -15,7 +15,7 @@ namespace PEDRO.Models
         public string nome { get; set; }
         [Required]
         [EmailAddress]
-        [Display(Name = "Email uitilizado no serviço")]
+        [Display(Name = "Email utilizado no serviço")]
         public string email { get; set; }
         [Required]
         [DataType(DataType.Password)]
