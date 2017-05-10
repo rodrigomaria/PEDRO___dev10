@@ -34,6 +34,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=%28LocalDb%29\MSSQLLocalDB%3bAttachDbFilename=|DataDirectory|\aspnet-PEDRO-20170424092318.mdf%3bInitial Catalog=aspnet-PEDRO-20170424092318%3bIntegrated Security=True" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -210,6 +221,10 @@
     <Compile Include="Migrations\201705031857326_clouds.Designer.cs">
       <DependentUpon>201705031857326_clouds.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705091344081_adição de chave estrangeira em cloud.cs" />
+    <Compile Include="Migrations\201705091344081_adição de chave estrangeira em cloud.Designer.cs">
+      <DependentUpon>201705091344081_adição de chave estrangeira em cloud.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ArquivosUsuariosModels.cs" />
@@ -234,6 +249,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\LocalPublish.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalPublish2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -309,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705031857326_clouds.resx">
       <DependentUpon>201705031857326_clouds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091344081_adição de chave estrangeira em cloud.resx">
+      <DependentUpon>201705091344081_adição de chave estrangeira em cloud.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -25,5 +25,7 @@ namespace PEDRO.Models
         [Display(Name = "Confirmar senha")]
         [Compare("pass", ErrorMessage = "As senhas informadas não são iguais.")]
         public string confirmPass { get; set; }
+        public int userid { get; set; }
+        public virtual ApplicationUser user { get; set; }
     }
 }

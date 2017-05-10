@@ -1,0 +1,3 @@
+USE [aspnet-PEDRO-20170424092318];
+ALTER TABLE AspNetUsers DROP COLUMN PhoneNumber;
+ALTER TABLE AspNetUsers DROP COLUMN PhoneNumberConfirmed;
