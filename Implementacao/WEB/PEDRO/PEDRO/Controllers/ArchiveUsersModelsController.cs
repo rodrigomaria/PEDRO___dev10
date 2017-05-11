@@ -7,113 +7,110 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PEDRO.Models;
-using Microsoft.AspNet.Identity;
 
 namespace PEDRO.Controllers
 {
-    [Authorize]
-    public class CloudController : Controller
+    public class ArchiveUsersModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Cloud
+        // GET: ArchiveUsersModels
         public ActionResult Index()
         {
-            string id = User.Identity.GetUserId();
-            return View(db.CloudModels.Where(cm => cm.user.Id == id).ToList());
+            return View(db.ArchiveUsersModels.ToList());
         }
 
-        // GET: Cloud/Details/5
+        // GET: ArchiveUsersModels/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CloudModel cloudModel = db.CloudModels.Find(id);
-            if (cloudModel == null)
+            ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
+            if (archiveUsersModels == null)
             {
                 return HttpNotFound();
             }
-            return View(cloudModel);
+            return View(archiveUsersModels);
         }
 
-        // GET: Cloud/Create
+        // GET: ArchiveUsersModels/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cloud/Create
+        // POST: ArchiveUsersModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,pass,confirmPass")] CloudModel cloudModel)
+        public ActionResult Create([Bind(Include = "id")] ArchiveUsersModels archiveUsersModels)
         {
             if (ModelState.IsValid)
             {
-                db.CloudModels.Add(cloudModel);
+                db.ArchiveUsersModels.Add(archiveUsersModels);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cloudModel);
+            return View(archiveUsersModels);
         }
 
-        // GET: Cloud/Edit/5
+        // GET: ArchiveUsersModels/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CloudModel cloudModel = db.CloudModels.Find(id);
-            if (cloudModel == null)
+            ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
+            if (archiveUsersModels == null)
             {
                 return HttpNotFound();
             }
-            return View(cloudModel);
+            return View(archiveUsersModels);
         }
 
-        // POST: Cloud/Edit/5
+        // POST: ArchiveUsersModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nome,email,pass,confirmPass")] CloudModel cloudModel)
+        public ActionResult Edit([Bind(Include = "id")] ArchiveUsersModels archiveUsersModels)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cloudModel).State = EntityState.Modified;
+                db.Entry(archiveUsersModels).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cloudModel);
+            return View(archiveUsersModels);
         }
 
-        // GET: Cloud/Delete/5
+        // GET: ArchiveUsersModels/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CloudModel cloudModel = db.CloudModels.Find(id);
-            if (cloudModel == null)
+            ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
+            if (archiveUsersModels == null)
             {
                 return HttpNotFound();
             }
-            return View(cloudModel);
+            return View(archiveUsersModels);
         }
 
-        // POST: Cloud/Delete/5
+        // POST: ArchiveUsersModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CloudModel cloudModel = db.CloudModels.Find(id);
-            db.CloudModels.Remove(cloudModel);
+            ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
+            db.ArchiveUsersModels.Remove(archiveUsersModels);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
