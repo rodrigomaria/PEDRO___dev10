@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace PEDRO.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private string outputFile;
@@ -73,7 +74,7 @@ namespace PEDRO.Controllers
             }
             else
             {
-                TempData["Erro"] = "Selecione um arquivo antes de clicar em decriptar.";
+                TempData["Erro"] = "Selecione um arquivo.";
                 return RedirectToAction("Erro");
             }
         }
