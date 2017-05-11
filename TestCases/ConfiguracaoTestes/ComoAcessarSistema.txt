@@ -1,0 +1,3 @@
+REQUISITO: Você precisa estar acessando a partir da rede wireless do campus;
+01) Contate os administradores do Sistema (Andrius, Gabriel Wolkmer, Jonas ou Rodrigo Maria);
+02) Será lhe informado o endereço para inserir no navegador e acessar ao sistema.

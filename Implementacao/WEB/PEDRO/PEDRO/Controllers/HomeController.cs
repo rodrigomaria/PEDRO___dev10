@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace PEDRO.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private string outputFile;
