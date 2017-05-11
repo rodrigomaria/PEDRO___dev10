@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PEDRO.Models;
 
 namespace PEDRO.Controllers
@@ -18,7 +19,8 @@ namespace PEDRO.Controllers
         // GET: Cloud
         public ActionResult Index()
         {
-            return View(db.CloudModels.ToList());
+            string id = User.Identity.GetUserId();
+            return View(db.CloudModels.Where(cm => cm.user.Id == id).ToList());
         }
 
         // GET: Cloud/Details/5
@@ -47,10 +49,11 @@ namespace PEDRO.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nome,email,pass,confirmPass")] CloudModel cloudModel)
+        public ActionResult Create([Bind(Include = "id,nome,email,pass,confirmPass,userid")] CloudModel cloudModel)
         {
             if (ModelState.IsValid)
             {
+                cloudModel.user = db.Users.Find(User.Identity.GetUserId());
                 db.CloudModels.Add(cloudModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");

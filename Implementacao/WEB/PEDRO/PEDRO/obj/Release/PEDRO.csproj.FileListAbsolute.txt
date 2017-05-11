@@ -84,3 +84,6 @@ C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.pdb
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.csprojResolveAssemblyReference.cache
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.adiçãodechaveestrangeiraemcloud.resources
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.trocadevariavelchaveestrangeira.resources
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.updatebd.resources
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.criacaobdarquivos.resources
