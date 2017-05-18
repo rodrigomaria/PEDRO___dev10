@@ -9,8 +9,7 @@ namespace PEDRO.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "PEDRO.Models.ApplicationDbContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(PEDRO.Models.ApplicationDbContext context)

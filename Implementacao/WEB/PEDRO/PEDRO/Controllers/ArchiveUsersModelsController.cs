@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PEDRO.Models;
+using Microsoft.AspNet.Identity;
 
 namespace PEDRO.Controllers
 {
@@ -17,7 +18,8 @@ namespace PEDRO.Controllers
         // GET: ArchiveUsersModels
         public ActionResult Index()
         {
-            return View(db.ArchiveUsersModels.ToList());
+            string id = User.Identity.GetUserId();
+            return View(db.ArchiveUsersModels.Where(am => am.user.Id == id).ToList());
         }
 
         // GET: ArchiveUsersModels/Details/5
@@ -46,7 +48,7 @@ namespace PEDRO.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id")] ArchiveUsersModels archiveUsersModels)
+        public ActionResult Create([Bind(Include = "id,nomeDoArquivo,tamanhoDoArquivo,tipoArquivo,dataUpload")] ArchiveUsersModels archiveUsersModels)
         {
             if (ModelState.IsValid)
             {

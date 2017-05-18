@@ -1,22 +1,22 @@
 ﻿@model PEDRO.Models.ArchiveUsersModels
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Adicionar novo arquivo";
 }
 
-<h2>Create</h2>
+<h2>Adicionar</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ArchiveUsersModels</h4>
+        <h4>Escolha seu arquivo para adicionar ao PEDRO</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Criar" class="btn btn-default" />
             </div>
         </div>
     </div>

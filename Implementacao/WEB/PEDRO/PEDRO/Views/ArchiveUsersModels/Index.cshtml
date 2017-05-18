@@ -1,24 +1,46 @@
 ﻿@model IEnumerable<PEDRO.Models.ArchiveUsersModels>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Gerenciador de Arquivos";
 }
 
-<h2>Arquivos</h2>
+<h2>@ViewBag.Title</h2>
 
+<p>
+    <div class="btn btn-default">
+        @Html.ActionLink("Adicionar novo", "Create")
+    </div>
+</p>
 <table class="table">
     <tr>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeDoArquivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipoArquivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tamanhoArquivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataUpload)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.id }) |
-            @Html.ActionLink("Deletar", "Delete", new { id=item.id })
+            @Html.DisplayFor(modelItem => item.nomeDoArquivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipoArquivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tamanhoArquivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataUpload)
         </td>
     </tr>
 }
-
 </table>

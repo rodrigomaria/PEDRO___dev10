@@ -12,16 +12,16 @@ namespace PEDRO.Models
         public int id { get; set; }
         [Required]
         [Display(Name = "Arquivo")]
-        private string nomeDoArquivo { get; set; }
+        public string nomeDoArquivo { get; set; }
         [Required]
         [Display(Name = "Tamanho")]
-        private double tamanhoArquivo { get; set; }
+        public double tamanhoArquivo { get; set; }
         [Required]
         [Display(Name = "Tipo de Arquivo")]
-        private String tipoArquivo { get; set; }
+        public String tipoArquivo { get; set; }
         [Required]
         [Display(Name = "Data de upload")]
-        private DateTime dataUpload { get; set; }
+        public DateTime dataUpload { get; set; }
         public virtual ApplicationUser user { get; set; }
         public virtual List<CloudModel> servicosNuvem { get; set; }
     }

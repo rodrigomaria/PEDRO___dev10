@@ -214,29 +214,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704241230418_InitialCreate.cs" />
-    <Compile Include="Migrations\201704241230418_InitialCreate.Designer.cs">
-      <DependentUpon>201704241230418_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705031857326_clouds.cs" />
-    <Compile Include="Migrations\201705031857326_clouds.Designer.cs">
-      <DependentUpon>201705031857326_clouds.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705091344081_adição de chave estrangeira em cloud.cs" />
-    <Compile Include="Migrations\201705091344081_adição de chave estrangeira em cloud.Designer.cs">
-      <DependentUpon>201705091344081_adição de chave estrangeira em cloud.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705111116439_troca de variavel chave estrangeira.cs" />
-    <Compile Include="Migrations\201705111116439_troca de variavel chave estrangeira.Designer.cs">
-      <DependentUpon>201705111116439_troca de variavel chave estrangeira.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705111200000_update bd.cs" />
-    <Compile Include="Migrations\201705111200000_update bd.Designer.cs">
-      <DependentUpon>201705111200000_update bd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705111227185_criacao bd arquivos.cs" />
-    <Compile Include="Migrations\201705111227185_criacao bd arquivos.Designer.cs">
-      <DependentUpon>201705111227185_criacao bd arquivos.cs</DependentUpon>
+    <Compile Include="Migrations\201705180130234_Initial.cs" />
+    <Compile Include="Migrations\201705180130234_Initial.Designer.cs">
+      <DependentUpon>201705180130234_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -339,23 +319,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704241230418_InitialCreate.resx">
-      <DependentUpon>201704241230418_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031857326_clouds.resx">
-      <DependentUpon>201705031857326_clouds.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705091344081_adição de chave estrangeira em cloud.resx">
-      <DependentUpon>201705091344081_adição de chave estrangeira em cloud.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705111116439_troca de variavel chave estrangeira.resx">
-      <DependentUpon>201705111116439_troca de variavel chave estrangeira.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705111200000_update bd.resx">
-      <DependentUpon>201705111200000_update bd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705111227185_criacao bd arquivos.resx">
-      <DependentUpon>201705111227185_criacao bd arquivos.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705180130234_Initial.resx">
+      <DependentUpon>201705180130234_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
