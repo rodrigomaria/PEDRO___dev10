@@ -177,3 +177,4 @@ C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.criacaobdarquivos.resources
 >>>>>>> e3ba194df5ccbdff572d2a7ec9d99a5f6fec5247
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.Initial.resources
+C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.Initial.resources

@@ -12,6 +12,7 @@ using System.IO;
 
 namespace PEDRO.Controllers
 {
+    [Authorize]
     public class ArchiveUsersModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -47,28 +48,27 @@ namespace PEDRO.Controllers
         // POST: ArchiveUsersModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(HttpPostedFileBase file, ArchiveUsersModels archiveUsersModels)
+        public ActionResult Create(HttpPostedFileBase file)
         {
             if (file != null && file.ContentLength > 0 && ModelState.IsValid)
             {
-                var nomeDoArquivo = file.FileName;
-                var tamanhoArquivo = file.ContentLength;
-                var tipoArquivo = file.ContentType;
-                var dataUpload = DateTime.Now;
-
-                archiveUsersModels.nomeDoArquivo = nomeDoArquivo;
-                archiveUsersModels.tamanhoArquivo = tamanhoArquivo;
-                archiveUsersModels.tipoArquivo = tipoArquivo;
-                archiveUsersModels.dataUpload = dataUpload;
+                ArchiveUsersModels archiveUsersModels = new ArchiveUsersModels
+                {
+                    nomeDoArquivo = file.FileName,
+                    tamanhoArquivo = file.ContentLength,
+                    tipoArquivo = file.ContentType,
+                    dataUpload = DateTime.Now,
+                    user = db.Users.Find(User.Identity.GetUserId())
+                };
 
                 db.ArchiveUsersModels.Add(archiveUsersModels);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(archiveUsersModels);
+
+            return View("Index");
         }
 
         // GET: ArchiveUsersModels/Edit/5

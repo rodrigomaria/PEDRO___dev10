@@ -53,6 +53,7 @@ namespace PEDRO.Controllers
         {
             if (ModelState.IsValid)
             {
+                cloudModel.user = db.Users.Find(User.Identity.GetUserId());
                 db.CloudModels.Add(cloudModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");

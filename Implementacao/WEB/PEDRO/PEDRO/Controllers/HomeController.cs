@@ -25,7 +25,6 @@ namespace PEDRO.Controllers
             return View();
         }
         
-        [Authorize]
         [HttpPost]
         public ActionResult Encriptar(HttpPostedFileBase file, string userKey)
         {
