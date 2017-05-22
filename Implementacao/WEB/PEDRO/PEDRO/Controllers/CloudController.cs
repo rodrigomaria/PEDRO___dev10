@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using PEDRO.Models;
 using Microsoft.AspNet.Identity;
+using System.Security.Cryptography;
+using System.Text;
+using System.IO;
 
 namespace PEDRO.Controllers
 {
@@ -51,6 +54,29 @@ namespace PEDRO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,nome,email,pass,confirmPass")] CloudModel cloudModel)
         {
+            using (RijndaelManaged aes = new RijndaelManaged())
+            {
+                byte[] key = ASCIIEncoding.UTF8.GetBytes("chavedosbrothers");
+                byte[] IV = ASCIIEncoding.UTF8.GetBytes("chavedosbrothers");
+
+                byte[] cryptoPass = Encoding.Default.GetBytes(cloudModel.pass);
+                byte[] cryptoConfirmPass = Encoding.Default.GetBytes(cloudModel.confirmPass);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (ICryptoTransform encryptor = aes.CreateEncryptor(key, IV))
+                    {
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                        {
+                            cs.Write(cryptoPass, 0, cryptoPass.Length);
+                            cs.Close();
+                        }
+                        cloudModel.pass = Encoding.Default.GetString(ms.ToArray());
+                        cloudModel.confirmPass = Encoding.Default.GetString(ms.ToArray());
+                    }
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 cloudModel.user = db.Users.Find(User.Identity.GetUserId());

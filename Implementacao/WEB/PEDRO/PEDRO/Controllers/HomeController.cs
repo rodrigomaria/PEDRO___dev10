@@ -28,6 +28,16 @@ namespace PEDRO.Controllers
         [HttpPost]
         public ActionResult Encriptar(HttpPostedFileBase file, string userKey)
         {
+            if(userKey.Length < 8 || userKey.Length > 16)
+            {
+                TempData["Erro"] = "A senha do arquivo deve ter no mínimo 8 e no máximo 16 caracteres";
+                return RedirectToAction("Erro");
+            }
+            else
+            {
+                for(int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
+            }
+
             if (file != null && file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName);
