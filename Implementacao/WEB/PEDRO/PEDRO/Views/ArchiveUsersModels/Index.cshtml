@@ -4,43 +4,50 @@
     ViewBag.Title = "Gerenciador de Arquivos";
 }
 
-<h2>@ViewBag.Title</h2>
-
-<p>
-    <div class="btn btn-default">
-        @Html.ActionLink("Adicionar novo", "Create")
-    </div>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeDoArquivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipoArquivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tamanhoArquivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dataUpload)
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeDoArquivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipoArquivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tamanhoArquivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dataUpload)
-        </td>
-    </tr>
+@*@using (Html.BeginForm("Create", "ArchiveUsersModels", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <p>
+            <h2>@ViewBag.Title</h2>
+            <h2>@TempData["Sucesso"]</h2>
+            <input type="file" name="file" id="file" />
+            <input type="submit" class="btn btn-toolbar" value="Enviar" />
+        </p>
+     </div>
 }
-</table>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.nomeDoArquivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tipoArquivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tamanhoArquivo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dataUpload)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nomeDoArquivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tipoArquivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tamanhoArquivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dataUpload)
+                    </td>
+                </tr>
+            }
+        </table>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PEDRO.Models;
 using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace PEDRO.Controllers
 {
@@ -46,17 +47,27 @@ namespace PEDRO.Controllers
         // POST: ArchiveUsersModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nomeDoArquivo,tamanhoDoArquivo,tipoArquivo,dataUpload")] ArchiveUsersModels archiveUsersModels)
+        public ActionResult Create(HttpPostedFileBase file, ArchiveUsersModels archiveUsersModels)
         {
-            if (ModelState.IsValid)
+            if (file != null && file.ContentLength > 0 && ModelState.IsValid)
             {
+                var nomeDoArquivo = file.FileName;
+                var tamanhoArquivo = file.ContentLength;
+                var tipoArquivo = file.ContentType;
+                var dataUpload = DateTime.Now;
+
+                archiveUsersModels.nomeDoArquivo = nomeDoArquivo;
+                archiveUsersModels.tamanhoArquivo = tamanhoArquivo;
+                archiveUsersModels.tipoArquivo = tipoArquivo;
+                archiveUsersModels.dataUpload = dataUpload;
+
                 db.ArchiveUsersModels.Add(archiveUsersModels);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(archiveUsersModels);
         }
 
