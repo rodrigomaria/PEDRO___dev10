@@ -290,10 +290,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Encriptar.cshtml" />
     <Content Include="Views\Home\Erro.cshtml" />
     <Content Include="Views\Home\Decriptar.cshtml" />
-    <Content Include="Views\Home\Dividir.cshtml" />
     <Content Include="Views\Home\Recuperar.cshtml" />
     <Content Include="Views\Cloud\Create.cshtml" />
     <Content Include="Views\Cloud\Delete.cshtml" />

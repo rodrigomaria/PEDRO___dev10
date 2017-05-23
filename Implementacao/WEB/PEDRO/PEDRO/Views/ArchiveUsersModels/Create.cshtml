@@ -7,15 +7,28 @@
 @using (Html.BeginForm("Create", "ArchiveUsersModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="">
-            <h4>Escolha seu arquivo para adicionar ao PEDRO</h4>
-            <hr />
-            <h2>@TempData["Sucesso"]</h2>
+    <div class="form-horizontal">
+        <h4>Escolha seu arquivo para adicionar ao PEDRO</h4>
+        <hr />
+        <h2>@TempData["Sucesso"]</h2>
 
-            <input type="file" name="file" id="file" /><br>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="file" name="file" id="file" />
+            </div>
+        </div>
 
-            <input type="submit" class="btn btn-toolbar" value="Confirmar" />
+        <div class="form-group">
+            <label class="col-md-2" for="userKey">Insira uma senha para o arquivo selecionado:</label>
+            <div class="col-md-10">
+                <input type="password" name="userKey" id="userKey" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-toolbar" value="Confirmar" />
+            </div>
         </div>
     </div>
 }
