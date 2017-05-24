@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using PEDRO.DriveUtils;
 
 namespace PEDRO.Controllers
 {
@@ -76,7 +77,7 @@ namespace PEDRO.Controllers
                 };
 
                 string fileName = Path.GetFileName(file.FileName);
-                string inputFile = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                string inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), fileName);
                 file.SaveAs(inputFile);
 
                 try { Encriptar(inputFile, userKey); }
@@ -93,6 +94,7 @@ namespace PEDRO.Controllers
 
                 Dividir();
                 TempData["Sucesso"] = "Arquivo adicionado com sucesso!";
+                System.IO.File.Delete(inputFile);
                 return RedirectToAction("Index");
             }
             else
@@ -216,20 +218,33 @@ namespace PEDRO.Controllers
 
         private void Dividir()
         {
+            String clientId = "223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com";
+            String clientSecret = "cY0UZcKSCueq7QUEzRMw9680";
+            //Aqui cria o drive
+            //GoogleDriveUtil[] drive = {
+            //    //Jonas
+            //    new GoogleDriveUtil("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU"),
+            //    //Andrius
+            //    new GoogleDriveUtil("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680")
+            //};
+            GoogleDriveUtil drive = new GoogleDriveUtil(clientId, clientSecret);
+
             int numDeArqs = CloudCount();
 
             // pasta padrão
-            var path = Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatil");
+            var inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatil");
 
             //particiona arquivo por partes
-            byte[] todosOsBytes = System.IO.File.ReadAllBytes(path);
+            byte[] todosOsBytes = System.IO.File.ReadAllBytes(inputFile);
             int x = 0;
             int fatia = todosOsBytes.Length / numDeArqs;
             int sobra = todosOsBytes.Length % numDeArqs;
 
             for (int i = 0; i < numDeArqs; i++)
             {
-                using (FileStream file = new FileStream(path + "pt" + i, FileMode.Create))
+                string path = inputFile + "pt" + i;
+                string nome = "";
+                using (FileStream file = new FileStream(path, FileMode.Create))
                 {
                     if (i > 0)
                     {
@@ -241,9 +256,11 @@ namespace PEDRO.Controllers
                         file.Write(todosOsBytes, x, fatia + sobra);
                         x += fatia + sobra;
                     }
+                    nome = "teste" + i;
                 }
-
+                drive.upload(path, nome);
             }
+            System.IO.File.Delete(inputFile);
         }
     }
 }
