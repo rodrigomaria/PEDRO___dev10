@@ -330,6 +330,7 @@
     <Content Include="Views\ArchiveUsersModels\Details.cshtml" />
     <Content Include="Views\ArchiveUsersModels\Edit.cshtml" />
     <Content Include="Views\ArchiveUsersModels\Index.cshtml" />
+    <Content Include="Views\ArchiveUsersModels\Recuperar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\downloads\" />

@@ -60,7 +60,7 @@ namespace PEDRO.Controllers
         [HttpPost]
         public ActionResult Recuperar(int? id)
         {
-            
+            return HttpNotFound();
         }
         
         [HttpPost]

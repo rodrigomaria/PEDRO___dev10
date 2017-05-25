@@ -199,13 +199,23 @@ namespace PEDRO.Controllers
 
         public ActionResult Recuperar()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Recuperar(int? id)
+        {
+            Download("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
+            //Download("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
+            //Download("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU");
+
             return RedirectToAction("Index");
         }
 
         private int CloudCount()
         {
             int c = 0;
-            foreach(var item in db.CloudModels)
+            foreach(var item in db.CloudModels.ToList())
             {
                 if (item.user.Id == User.Identity.GetUserId())
                     c++;
@@ -234,10 +244,10 @@ namespace PEDRO.Controllers
             //Aqui cria o drive
 
             //Andrius
-            GoogleDriveUtil drive = new GoogleDriveUtil("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
-            //Jonas
-            GoogleDriveUtil drive1 = new GoogleDriveUtil("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU");
             
+            //Jonas
+            
+
             int numDeArqs = CloudCount();
 
             // pasta padrão
@@ -265,20 +275,27 @@ namespace PEDRO.Controllers
                         file.Write(todosOsBytes, x, fatia + sobra);
                         x += fatia + sobra;
                     }
-                    nome = path;
+                    nome = "volatilpt" + i;
                 }
 
-                if(i == 0)
+                if (i == 0)
+                {
+                    GoogleDriveUtil drive = new GoogleDriveUtil("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU");
                     drive.upload(path, nome);
-                if(i == 1)
+                }
+                    
+                if (i == 1)
+                {
+                    GoogleDriveUtil drive1 = new GoogleDriveUtil("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
                     drive1.upload(path, nome);
+                }  
 
                 System.IO.File.Delete(path);
             }
             System.IO.File.Delete(inputFile);
         }
 
-        private void Recuperar(string clientId, string clientSecret)
+        private void Download(string clientId, string clientSecret)
         {
             string fileId = "";
 
@@ -299,34 +316,35 @@ namespace PEDRO.Controllers
             });
 
             //LISTA
+            int clouds = CloudCount();
             FilesResource.ListRequest listResquest = service.Files.List();
             IList<Google.Apis.Drive.v2.Data.File> files = listResquest.Execute().Items;
             if (files != null && files.Count > 0)
             {
                 foreach (var file in files)
                 {
-                    for(int i = 0; i < CloudCount(); i++)
+                    for(int i = 0; i < clouds; i++)
                     {
                         if (file.Title.Equals("volatilpt" + i))
                         {
                             fileId = file.Id;
+                            var request = service.Files.Get(fileId);
+                            var stream = new System.IO.MemoryStream();
+                            request.Download(stream);
+
+                            using (FileStream f = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i), FileMode.Create))
+                            {
+                                stream.WriteTo(f);
+                            }
                             break;
                         }
                     }
                 }
             }
             
-            var request = service.Files.Get(fileId);
-            var stream = new System.IO.MemoryStream();
-
-            using (FileStream file = new FileStream(@"C:\Users\Ayres\Desktop\jubileuVoltou2", FileMode.Create))
-            {
-                stream.WriteTo(file);
-            }
-
             using (FileStream recu = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu"), FileMode.Create))
             {
-                for (int i = 0; i < CloudCount(); i++)
+                for (int i = 0; i < clouds; i++)
                 {
                     byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i));
                     recu.Write(bytes, 0, bytes.Length);
