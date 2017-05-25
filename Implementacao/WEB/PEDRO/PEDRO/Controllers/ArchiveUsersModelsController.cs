@@ -12,6 +12,11 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using PEDRO.DriveUtils;
+using Google.Apis.Auth.OAuth2;
+using System.Threading;
+using Google.Apis.Drive.v2;
+using Google.Apis.Util.Store;
+using Google.Apis.Services;
 
 namespace PEDRO.Controllers
 {
@@ -192,6 +197,11 @@ namespace PEDRO.Controllers
             }
         }
 
+        public ActionResult Recuperar()
+        {
+            return RedirectToAction("Index");
+        }
+
         private int CloudCount()
         {
             int c = 0;
@@ -218,17 +228,16 @@ namespace PEDRO.Controllers
 
         private void Dividir()
         {
-            String clientId = "223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com";
-            String clientSecret = "cY0UZcKSCueq7QUEzRMw9680";
+            //String clientId = "20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com";
+            //String clientSecret = "s34PdPNYav7lgi3nJsm3GpSU";
+            //GoogleDriveUtil drive = new GoogleDriveUtil(clientId, clientSecret);
             //Aqui cria o drive
-            //GoogleDriveUtil[] drive = {
-            //    //Jonas
-            //    new GoogleDriveUtil("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU"),
-            //    //Andrius
-            //    new GoogleDriveUtil("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680")
-            //};
-            GoogleDriveUtil drive = new GoogleDriveUtil(clientId, clientSecret);
 
+            //Andrius
+            GoogleDriveUtil drive = new GoogleDriveUtil("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
+            //Jonas
+            GoogleDriveUtil drive1 = new GoogleDriveUtil("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU");
+            
             int numDeArqs = CloudCount();
 
             // pasta padrão
@@ -256,11 +265,73 @@ namespace PEDRO.Controllers
                         file.Write(todosOsBytes, x, fatia + sobra);
                         x += fatia + sobra;
                     }
-                    nome = "teste" + i;
+                    nome = path;
                 }
-                drive.upload(path, nome);
+
+                if(i == 0)
+                    drive.upload(path, nome);
+                if(i == 1)
+                    drive1.upload(path, nome);
+
+                System.IO.File.Delete(path);
             }
             System.IO.File.Delete(inputFile);
+        }
+
+        private void Recuperar(string clientId, string clientSecret)
+        {
+            string fileId = "";
+
+            UserCredential credential = GoogleWebAuthorizationBroker.AuthorizeAsync(new ClientSecrets
+            {
+                ClientId = clientId,
+                ClientSecret = clientSecret
+            },
+            new string[] { DriveService.Scope.Drive, DriveService.Scope.DriveFile },
+            Environment.UserName,
+            CancellationToken.None,
+            new FileDataStore("Daimto.GoogleDrive.Auth.Store")).Result;
+
+            DriveService service = new DriveService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "Pedro"
+            });
+
+            //LISTA
+            FilesResource.ListRequest listResquest = service.Files.List();
+            IList<Google.Apis.Drive.v2.Data.File> files = listResquest.Execute().Items;
+            if (files != null && files.Count > 0)
+            {
+                foreach (var file in files)
+                {
+                    for(int i = 0; i < CloudCount(); i++)
+                    {
+                        if (file.Title.Equals("volatilpt" + i))
+                        {
+                            fileId = file.Id;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            var request = service.Files.Get(fileId);
+            var stream = new System.IO.MemoryStream();
+
+            using (FileStream file = new FileStream(@"C:\Users\Ayres\Desktop\jubileuVoltou2", FileMode.Create))
+            {
+                stream.WriteTo(file);
+            }
+
+            using (FileStream recu = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu"), FileMode.Create))
+            {
+                for (int i = 0; i < CloudCount(); i++)
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i));
+                    recu.Write(bytes, 0, bytes.Length);
+                }
+            }
         }
     }
 }

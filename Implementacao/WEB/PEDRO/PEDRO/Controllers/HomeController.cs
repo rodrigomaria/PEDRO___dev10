@@ -1,8 +1,14 @@
-﻿using System;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Download;
+using Google.Apis.Drive.v2;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -54,16 +60,7 @@ namespace PEDRO.Controllers
         [HttpPost]
         public ActionResult Recuperar(int? id)
         {
-            using (FileStream recu = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu"), FileMode.Create))
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i));
-                    recu.Write(bytes, 0, bytes.Length);
-                }
-            }
-
-            return View("Decriptar");
+            
         }
         
         [HttpPost]
