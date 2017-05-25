@@ -40,6 +40,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.dataUpload)
             </td>
+            <td>
+                @Html.ActionLink("Excluir", "Delete", new { id=item.id })
+            </td>
         </tr>
     }
 </table>
