@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.dataUpload)
         </th>
+        <th>
+            Opções
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -35,12 +38,13 @@
                 @Html.DisplayFor(modelItem => item.tipoArquivo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tamanhoArquivo)
+                @Html.DisplayFor(modelItem => item.tamanhoArquivo) Kb
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dataUpload)
             </td>
             <td>
+                @Html.ActionLink("Recuperar", "Recuperar", new { id = item.id }) |
                 @Html.ActionLink("Excluir", "Delete", new { id=item.id })
             </td>
         </tr>

@@ -30,7 +30,7 @@ namespace PEDRO.Controllers
             string id = User.Identity.GetUserId();
             return View(db.ArchiveUsersModels.Where(am => am.user.Id == id).ToList());
         }
-        
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -75,7 +75,7 @@ namespace PEDRO.Controllers
                 ArchiveUsersModels archiveUsersModels = new ArchiveUsersModels
                 {
                     nomeDoArquivo = file.FileName,
-                    tamanhoArquivo = file.ContentLength,
+                    tamanhoArquivo = (file.ContentLength)/1024,
                     tipoArquivo = file.ContentType,
                     dataUpload = DateTime.Now,
                     user = db.Users.Find(User.Identity.GetUserId())

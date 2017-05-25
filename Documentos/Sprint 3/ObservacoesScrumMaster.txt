@@ -1,0 +1,6 @@
+Ver:
+- using salt for password
+
+Observações:
+- user stories com critérios de aceitação para cada uma
+
