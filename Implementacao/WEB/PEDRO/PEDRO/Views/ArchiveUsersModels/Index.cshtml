@@ -9,19 +9,29 @@
         @Html.ActionLink("Adicionar arquivo", "Create")
     </div>
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Filtrar por: @Html.TextBox("SearchString")
+        <input type="submit" value="Buscar" />
+        @Html.ActionLink("Limpar", "Index")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nomeDoArquivo)
+            @Html.ActionLink("Nome do Arquivo", "Index", new { sortOrder = ViewBag.NomeSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tipoArquivo)
+            @Html.ActionLink("Tipo", "Index", new { sortOrder = ViewBag.TipoSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tamanhoArquivo)
+            @Html.ActionLink("Tamanho", "Index", new { sortOrder = ViewBag.TamanhoSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dataUpload)
+            @Html.ActionLink("Data", "Index", new { sortOrder = ViewBag.DataSortParm })
         </th>
         <th>
             Opções

@@ -186,18 +186,18 @@ C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.M
 C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.csproj.GenerateResource.Cache
 C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.dll
 C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.pdb
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\VBCSCompiler.exe
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\ApplicationInsights.config
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\csc.exe
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\vbc.exe
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\VBCSCompiler.exe
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\PEDRO.dll.config
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\PEDRO.dll
@@ -275,8 +275,8 @@ C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.csprojResolveAssemblyReference.cache
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.Migrations.Initial.resources
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.csproj.GenerateResource.Cache
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.pdb
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Release\PEDRO.csprojResolveAssemblyReference.cache

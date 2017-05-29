@@ -24,11 +24,56 @@ namespace PEDRO.Controllers
     public class ArchiveUsersModelsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
-        public ActionResult Index()
+
+        public ViewResult Index(string sortOrder, string searchString)
         {
+            ViewBag.NomeSortParm = sortOrder == "nomeDoArquivo_asc" ? "nomeDoArquivo_desc" : "nomeDoArquivo_asc";
+            ViewBag.TipoSortParm = sortOrder == "tipoArquivo_asc" ? "tipoArquivo_desc" : "tipoArquivo_asc";
+            ViewBag.TamanhoSortParm = sortOrder == "tamanhoArquivo_asc" ? "tamanhoArquivo_desc" : "tamanhoArquivo_asc";
+            ViewBag.DataSortParm = sortOrder == "dataUpload_asc" ? "dataUpload_desc" : "dataUpload_asc";
+
+            var archives = from s in db.ArchiveUsersModels select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                archives = archives.Where(s => s.nomeDoArquivo.Contains(searchString)
+                                       || s.tipoArquivo.Contains(searchString)
+                                       || s.tamanhoArquivo.ToString().Contains(searchString)
+                                       || s.dataUpload.ToString().Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "nomeDoArquivo_asc":
+                    archives = archives.OrderBy(s => s.nomeDoArquivo);
+                    break;
+                case "nomeDoArquivo_desc":
+                    archives = archives.OrderByDescending(s => s.nomeDoArquivo);
+                    break;
+                case "tipoArquivo_asc":
+                    archives = archives.OrderBy(s => s.tipoArquivo);
+                    break;
+                case "tipoArquivo_desc":
+                    archives = archives.OrderByDescending(s => s.tipoArquivo);
+                    break;
+                case "tamanhoArquivo_asc":
+                    archives = archives.OrderBy(s => s.tamanhoArquivo);
+                    break;
+                case "tamanhoArquivo_desc":
+                    archives = archives.OrderByDescending(s => s.tamanhoArquivo);
+                    break;
+                case "dataUpload_asc":
+                    archives = archives.OrderBy(s => s.dataUpload);
+                    break;
+                case "dataUpload_desc":
+                    archives = archives.OrderByDescending(s => s.dataUpload);
+                    break;
+                default:
+                    archives = archives.OrderBy(s => s.nomeDoArquivo);
+                    break;
+            }
             string id = User.Identity.GetUserId();
-            return View(db.ArchiveUsersModels.Where(am => am.user.Id == id).ToList());
+            return View(archives.Where(am => am.user.Id == id).ToList());
         }
 
         public ActionResult Details(int? id)
