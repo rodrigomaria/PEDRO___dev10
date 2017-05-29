@@ -14,8 +14,8 @@
 {
     <p>
         Filtrar por: @Html.TextBox("SearchString")
-        <input type="submit" value="Buscar" />
-        @Html.ActionLink("Limpar", "Index")
+        <input type="submit" value="Buscar" class="btn btn-default"/>
+        @Html.ActionLink("Limpar", "Index", null, new { @class="btn btn-default" })      
     </p>
 }
 
