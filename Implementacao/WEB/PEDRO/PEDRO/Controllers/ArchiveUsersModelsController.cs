@@ -250,7 +250,7 @@ namespace PEDRO.Controllers
         [HttpPost]
         public ActionResult Recuperar(int? id)
         {
-            Download("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
+            Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
             //Download("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
             //Download("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU");
 
@@ -322,18 +322,9 @@ namespace PEDRO.Controllers
                     }
                     nome = "volatilpt" + i;
                 }
-
-                if (i == 0)
-                {
-                    GoogleDriveUtil drive = new GoogleDriveUtil("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU");
-                    drive.upload(path, nome);
-                }
-                    
-                if (i == 1)
-                {
-                    GoogleDriveUtil drive1 = new GoogleDriveUtil("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
-                    drive1.upload(path, nome);
-                }  
+                
+                GoogleDriveUtil drive = new GoogleDriveUtil("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
+                drive.upload(path, nome);
 
                 System.IO.File.Delete(path);
             }
