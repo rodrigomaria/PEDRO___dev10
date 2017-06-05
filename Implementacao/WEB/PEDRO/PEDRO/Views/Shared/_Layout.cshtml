@@ -17,11 +17,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("PEDRO 2.0", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href='@Url.Action("Index", "Home")'>
+                    <img src="~/Images/Logo.png" width="60"/>
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Arquivos", "Index", "ArchiveUsersModels")</li>
+                    <li>@Html.ActionLink("Meus arquivos", "Index", "ArchiveUsersModels")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
