@@ -1049,13 +1049,26 @@
             <summary>Gets the media downloader.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.ExportRequest.Download(System.IO.Stream)">
+            <summary>
+            <para>Synchronously download the media into the given stream.</para>
+            <para>Warning: This method hides download errors; use <see cref="M:Google.Apis.Drive.v2.FilesResource.ExportRequest.DownloadWithStatus(System.IO.Stream)"/> instead.</para>
+            </summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.ExportRequest.DownloadWithStatus(System.IO.Stream)">
             <summary>Synchronously download the media into the given stream.</summary>
+            <returns>The final status of the download; including whether the download succeeded or failed.</returns>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.ExportRequest.DownloadAsync(System.IO.Stream)">
             <summary>Asynchronously download the media into the given stream.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.ExportRequest.DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)">
             <summary>Asynchronously download the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.ExportRequest.DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)">
+            <summary>Synchronously download a range of the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.ExportRequest.DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)">
+            <summary>Asynchronously download a range of the media into the given stream.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.GenerateIds">
             <summary>Generates a set of file IDs which can be provided in insert requests.</summary>
@@ -1148,13 +1161,26 @@
             <summary>Gets the media downloader.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.GetRequest.Download(System.IO.Stream)">
+            <summary>
+            <para>Synchronously download the media into the given stream.</para>
+            <para>Warning: This method hides download errors; use <see cref="M:Google.Apis.Drive.v2.FilesResource.GetRequest.DownloadWithStatus(System.IO.Stream)"/> instead.</para>
+            </summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.GetRequest.DownloadWithStatus(System.IO.Stream)">
             <summary>Synchronously download the media into the given stream.</summary>
+            <returns>The final status of the download; including whether the download succeeded or failed.</returns>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.GetRequest.DownloadAsync(System.IO.Stream)">
             <summary>Asynchronously download the media into the given stream.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.GetRequest.DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)">
             <summary>Asynchronously download the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.GetRequest.DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)">
+            <summary>Synchronously download a range of the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.GetRequest.DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)">
+            <summary>Asynchronously download a range of the media into the given stream.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.Insert(Google.Apis.Drive.v2.Data.File)">
             <summary>Insert a new file.</summary>
@@ -1913,13 +1939,26 @@
             <summary>Gets the media downloader.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.WatchRequest.Download(System.IO.Stream)">
+            <summary>
+            <para>Synchronously download the media into the given stream.</para>
+            <para>Warning: This method hides download errors; use <see cref="M:Google.Apis.Drive.v2.FilesResource.WatchRequest.DownloadWithStatus(System.IO.Stream)"/> instead.</para>
+            </summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.WatchRequest.DownloadWithStatus(System.IO.Stream)">
             <summary>Synchronously download the media into the given stream.</summary>
+            <returns>The final status of the download; including whether the download succeeded or failed.</returns>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.WatchRequest.DownloadAsync(System.IO.Stream)">
             <summary>Asynchronously download the media into the given stream.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.FilesResource.WatchRequest.DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)">
             <summary>Asynchronously download the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.WatchRequest.DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)">
+            <summary>Synchronously download a range of the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.FilesResource.WatchRequest.DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)">
+            <summary>Asynchronously download a range of the media into the given stream.</summary>
         </member>
         <member name="T:Google.Apis.Drive.v2.ParentsResource">
             <summary>The "parents" collection of methods.</summary>
@@ -2595,13 +2634,26 @@
             <summary>Gets the media downloader.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.RealtimeResource.GetRequest.Download(System.IO.Stream)">
+            <summary>
+            <para>Synchronously download the media into the given stream.</para>
+            <para>Warning: This method hides download errors; use <see cref="M:Google.Apis.Drive.v2.RealtimeResource.GetRequest.DownloadWithStatus(System.IO.Stream)"/> instead.</para>
+            </summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.RealtimeResource.GetRequest.DownloadWithStatus(System.IO.Stream)">
             <summary>Synchronously download the media into the given stream.</summary>
+            <returns>The final status of the download; including whether the download succeeded or failed.</returns>
         </member>
         <member name="M:Google.Apis.Drive.v2.RealtimeResource.GetRequest.DownloadAsync(System.IO.Stream)">
             <summary>Asynchronously download the media into the given stream.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.RealtimeResource.GetRequest.DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)">
             <summary>Asynchronously download the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.RealtimeResource.GetRequest.DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)">
+            <summary>Synchronously download a range of the media into the given stream.</summary>
+        </member>
+        <member name="M:Google.Apis.Drive.v2.RealtimeResource.GetRequest.DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)">
+            <summary>Asynchronously download a range of the media into the given stream.</summary>
         </member>
         <member name="M:Google.Apis.Drive.v2.RealtimeResource.Update(System.String)">
             <summary>Overwrites the Realtime API data model associated with this file with the provided JSON data

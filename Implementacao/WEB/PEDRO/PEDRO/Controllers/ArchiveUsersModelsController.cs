@@ -248,13 +248,34 @@ namespace PEDRO.Controllers
         }
 
         [HttpPost]
-        public ActionResult Recuperar(int? id)
+        public ActionResult Recuperar(int? id, string userKey)
         {
-            Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
-            //Download("223955441118-6rkg9ssnc2cg7kg8l5rpao3mto01kos1.apps.googleusercontent.com", "cY0UZcKSCueq7QUEzRMw9680");
-            //Download("20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com", "s34PdPNYav7lgi3nJsm3GpSU");
+            if (userKey.Length < 8 || userKey.Length > 16)
+            {
+                TempData["Erro"] = "A senha do arquivo deve ter no mínimo 8 e no máximo 16 caracteres.";
+                return RedirectToAction("Erro");
+            }
+            else
+            {
+                for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
 
-            return RedirectToAction("Index");
+                Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
+
+                try
+                {
+                    Decriptar(userKey);
+
+                    TempData["Sucesso"] = "Arquivo decriptado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
+                        "\n" + ex.Message + "\n" + ex.Data + "\n" + ex.StackTrace;
+
+                    return RedirectToAction("Erro");
+                }
+            }
         }
 
         private int CloudCount()
@@ -386,6 +407,40 @@ namespace PEDRO.Controllers
                     recu.Write(bytes, 0, bytes.Length);
                 }
             }
+
+            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt0"));
+            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt1"));
+        }
+
+        public void Decriptar(string userKey)
+        {
+            var inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu");
+            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "decriptado");
+
+            using (RijndaelManaged aes = new RijndaelManaged())
+            {
+                byte[] key = ASCIIEncoding.UTF8.GetBytes(userKey);
+
+                byte[] IV = ASCIIEncoding.UTF8.GetBytes(userKey);
+
+                using (FileStream fsCrypt = new FileStream(inputFile, FileMode.Open))
+                {
+                    using (FileStream fsOut = new FileStream(outputFile, FileMode.Create))
+                    {
+                        using (ICryptoTransform decryptor = aes.CreateDecryptor(key, IV))
+                        {
+                            using (CryptoStream cs = new CryptoStream(fsCrypt, decryptor, CryptoStreamMode.Read))
+                            {
+                                int data;
+                                while ((data = cs.ReadByte()) != -1)
+                                    fsOut.WriteByte((byte)data);
+                            }
+                        }
+                    }
+                }
+            }
+
+            System.IO.File.Delete(inputFile);
         }
     }
 }

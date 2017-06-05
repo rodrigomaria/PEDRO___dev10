@@ -68,6 +68,16 @@ namespace PEDRO.Controllers
         {
             if (file != null && file.ContentLength > 0)
             {
+                if (userKey.Length < 8 || userKey.Length > 16)
+                {
+                    TempData["Erro"] = "A senha do arquivo deve ter no mínimo 8 e no máximo 16 caracteres.";
+                    return RedirectToAction("Erro");
+                }
+                else
+                {
+                    for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
+                }
+
                 try
                 {
                     var fileName = Path.GetFileName(file.FileName);
