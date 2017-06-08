@@ -302,9 +302,19 @@ namespace PEDRO.Controllers
                 else
                 {
                     for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
+                    
+                    try
+                    {
+                        Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V", db.ArchiveUsersModels.Find(id).hashFileName);
+                    }
+                    catch(Exception ex)
+                    {
+                        TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
+                            "\n" + ex.Message + "\n" + ex.Data + "\n" + ex.StackTrace;
 
-                    var archive = db.ArchiveUsersModels.Find(id);
-                    Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V", archive.hashFileName);
+                        return RedirectToAction("Erro", "Home");
+                    }
+                    
 
                     try
                     {
@@ -413,6 +423,7 @@ namespace PEDRO.Controllers
             //lista
             int clouds = CloudCount();
             FilesResource.ListRequest listResquest = service.Files.List();
+            listResquest.Q = "'root' in parents and trashed = false";
             IList<Google.Apis.Drive.v2.Data.File> files = listResquest.Execute().Items;
             if (files != null && files.Count > 0)
             {
