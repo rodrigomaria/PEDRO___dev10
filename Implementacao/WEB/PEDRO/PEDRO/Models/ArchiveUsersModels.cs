@@ -22,6 +22,7 @@ namespace PEDRO.Models
         [Required]
         [Display(Name = "Data de upload")]
         public DateTime dataUpload { get; set; }
+        public string hashFileName { get; set; }
         public virtual ApplicationUser user { get; set; }
         public virtual List<CloudModel> servicosNuvem { get; set; }
     }

@@ -120,9 +120,10 @@ namespace PEDRO.Controllers
                 ArchiveUsersModels archiveUsersModels = new ArchiveUsersModels
                 {
                     nomeDoArquivo = file.FileName,
-                    tamanhoArquivo = (file.ContentLength)/1024,
+                    tamanhoArquivo = (file.ContentLength) / 1024,
                     tipoArquivo = file.ContentType,
                     dataUpload = DateTime.Now,
+                    hashFileName = CreateNameFileSALT(file.FileName),
                     user = db.Users.Find(User.Identity.GetUserId())
                 };
 
@@ -130,7 +131,7 @@ namespace PEDRO.Controllers
                 string inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), fileName);
                 file.SaveAs(inputFile);
 
-                try { Encriptar(inputFile, userKey); }
+                try { Encriptar(inputFile, userKey, archiveUsersModels.hashFileName.ToString()); }
                 catch (Exception ex)
                 {
                     TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
@@ -142,7 +143,7 @@ namespace PEDRO.Controllers
                 db.ArchiveUsersModels.Add(archiveUsersModels);
                 db.SaveChanges();
 
-                Dividir();
+                Dividir(archiveUsersModels.hashFileName.ToString());
                 TempData["Sucesso"] = "Arquivo adicionado com sucesso!";
                 System.IO.File.Delete(inputFile);
                 return RedirectToAction("Index");
@@ -214,9 +215,22 @@ namespace PEDRO.Controllers
             base.Dispose(disposing);
         }
 
-        private void Encriptar(string filePath, string userKey)
+        private string CreateNameFileSALT(string filename)
         {
-            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatil");
+            byte[] salt = new byte[16];
+            new RNGCryptoServiceProvider().GetBytes(salt);
+            var pbkdf2 = new Rfc2898DeriveBytes(filename, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            byte[] hashBytes = new Byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            filename = Convert.ToBase64String(hashBytes);
+            return filename;
+        }
+
+        private void Encriptar(string filePath, string userKey, string hashFileName)
+        {
+            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), hashFileName);
             
             using (RijndaelManaged aes = new RijndaelManaged())
             {
@@ -248,7 +262,7 @@ namespace PEDRO.Controllers
         }
 
         [HttpPost]
-        public ActionResult Recuperar(int? id, string userKey)
+        public ActionResult Recuperar(int? id, string userKey, ArchiveUsersModels archive)
         {
             if (userKey.Length < 8 || userKey.Length > 16)
             {
@@ -259,7 +273,7 @@ namespace PEDRO.Controllers
             {
                 for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
 
-                Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
+                Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V", archive.hashFileName.ToString());
 
                 try
                 {
@@ -302,22 +316,12 @@ namespace PEDRO.Controllers
             return false;
         }
 
-        private void Dividir()
-        {
-            //String clientId = "20614194023-ut4led25htpo0ub1tr6opfgmmfln27ao.apps.googleusercontent.com";
-            //String clientSecret = "s34PdPNYav7lgi3nJsm3GpSU";
-            //GoogleDriveUtil drive = new GoogleDriveUtil(clientId, clientSecret);
-            //Aqui cria o drive
-
-            //Andrius
-            
-            //Jonas
-            
-
+        private void Dividir(string fileNameHash)
+        {    
             int numDeArqs = CloudCount();
 
             // pasta padrão
-            var inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatil");
+            var inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash);
 
             //particiona arquivo por partes
             byte[] todosOsBytes = System.IO.File.ReadAllBytes(inputFile);
@@ -341,7 +345,7 @@ namespace PEDRO.Controllers
                         file.Write(todosOsBytes, x, fatia + sobra);
                         x += fatia + sobra;
                     }
-                    nome = "volatilpt" + i;
+                    nome = fileNameHash + i;
                 }
                 
                 GoogleDriveUtil drive = new GoogleDriveUtil("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
@@ -352,7 +356,7 @@ namespace PEDRO.Controllers
             System.IO.File.Delete(inputFile);
         }
 
-        private void Download(string clientId, string clientSecret)
+        private void Download(string clientId, string clientSecret, string fileNameHash)
         {
             string fileId = "";
 
@@ -372,7 +376,7 @@ namespace PEDRO.Controllers
                 ApplicationName = "Pedro"
             });
 
-            //LISTA
+            //lista
             int clouds = CloudCount();
             FilesResource.ListRequest listResquest = service.Files.List();
             IList<Google.Apis.Drive.v2.Data.File> files = listResquest.Execute().Items;
@@ -382,14 +386,14 @@ namespace PEDRO.Controllers
                 {
                     for(int i = 0; i < clouds; i++)
                     {
-                        if (file.Title.Equals("volatilpt" + i))
+                        if (file.Title.Equals(fileNameHash + i))
                         {
                             fileId = file.Id;
                             var request = service.Files.Get(fileId);
                             var stream = new System.IO.MemoryStream();
                             request.Download(stream);
 
-                            using (FileStream f = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i), FileMode.Create))
+                            using (FileStream f = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + i), FileMode.Create))
                             {
                                 stream.WriteTo(f);
                             }
@@ -403,13 +407,13 @@ namespace PEDRO.Controllers
             {
                 for (int i = 0; i < clouds; i++)
                 {
-                    byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt" + i));
+                    byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + i));
                     recu.Write(bytes, 0, bytes.Length);
                 }
             }
 
-            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt0"));
-            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), "volatilpt1"));
+            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + "0"));
+            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + "1"));
         }
 
         public void Decriptar(string userKey)

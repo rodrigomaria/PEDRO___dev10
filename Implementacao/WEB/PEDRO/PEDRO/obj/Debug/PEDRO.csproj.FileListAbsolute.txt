@@ -1,3 +1,5 @@
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.Initial.resources
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csproj.GenerateResource.Cache
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\ApplicationInsights.config
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\csc.exe
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\roslyn\csc.exe.config
@@ -95,7 +97,6 @@ C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\System.Web.WebPages.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\System.Web.WebPages.Razor.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\WebGrease.dll
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\System.Net.Http.Formatting.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Antlr3.Runtime.pdb
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Google.Apis.xml
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Google.Apis.Auth.xml
@@ -134,8 +135,6 @@ C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csprojResolveAssemblyReference.cache
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.Initial.resources
-C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csproj.GenerateResource.Cache
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.pdb
+C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csprojResolveAssemblyReference.cache
