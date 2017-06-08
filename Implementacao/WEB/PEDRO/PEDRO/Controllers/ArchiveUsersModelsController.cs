@@ -117,7 +117,7 @@ namespace PEDRO.Controllers
                     for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
                 }
 
-                ArchiveUsersModels archiveUsersModels = new ArchiveUsersModels
+                ArchiveUsersModels archive = new ArchiveUsersModels
                 {
                     nomeDoArquivo = file.FileName,
                     tamanhoArquivo = (file.ContentLength) / 1024,
@@ -127,11 +127,13 @@ namespace PEDRO.Controllers
                     user = db.Users.Find(User.Identity.GetUserId())
                 };
 
+                archive.hashFileName = archive.hashFileName.Replace('/', 'q');
+                archive.hashFileName = archive.hashFileName.Replace('+', 'z');
                 string fileName = Path.GetFileName(file.FileName);
                 string inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), fileName);
                 file.SaveAs(inputFile);
 
-                try { Encriptar(inputFile, userKey, archiveUsersModels.hashFileName.ToString()); }
+                try { Encriptar(inputFile, userKey, archive.hashFileName); }
                 catch (Exception ex)
                 {
                     TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
@@ -140,10 +142,10 @@ namespace PEDRO.Controllers
                     return RedirectToAction("Erro", "Home");
                 }
 
-                db.ArchiveUsersModels.Add(archiveUsersModels);
+                db.ArchiveUsersModels.Add(archive);
                 db.SaveChanges();
 
-                Dividir(archiveUsersModels.hashFileName.ToString());
+                Dividir(archive.hashFileName);
                 TempData["Sucesso"] = "Arquivo adicionado com sucesso!";
                 System.IO.File.Delete(inputFile);
                 return RedirectToAction("Index");
@@ -230,7 +232,7 @@ namespace PEDRO.Controllers
 
         private void Encriptar(string filePath, string userKey, string hashFileName)
         {
-            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), hashFileName);
+            var outputFile = Server.MapPath("~/App_Data/downloads/") + hashFileName;
             
             using (RijndaelManaged aes = new RijndaelManaged())
             {
@@ -256,40 +258,72 @@ namespace PEDRO.Controllers
             }
         }
 
+        private string Encriptar(string fileName)
+        {
+            using (RijndaelManaged aes = new RijndaelManaged())
+            {
+                byte[] key = ASCIIEncoding.UTF8.GetBytes("chavedosbrothers");
+                byte[] IV = ASCIIEncoding.UTF8.GetBytes("chavedosbrothers");
+
+                byte[] cryptoPass = Encoding.Default.GetBytes(fileName);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (ICryptoTransform encryptor = aes.CreateEncryptor(key, IV))
+                    {
+                        using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                        {
+                            cs.Write(cryptoPass, 0, cryptoPass.Length);
+                            cs.Close();
+                        }
+                        fileName = Encoding.Default.GetString(ms.ToArray());
+                    }
+                }
+            }
+
+            return fileName;
+        }
+
         public ActionResult Recuperar()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Recuperar(int? id, string userKey, ArchiveUsersModels archive)
+        public ActionResult Recuperar(int? id, string userKey)
         {
-            if (userKey.Length < 8 || userKey.Length > 16)
+            if(id != null)
             {
-                TempData["Erro"] = "A senha do arquivo deve ter no mínimo 8 e no máximo 16 caracteres.";
-                return RedirectToAction("Erro");
-            }
-            else
-            {
-                for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
-
-                Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V", archive.hashFileName.ToString());
-
-                try
+                if (userKey.Length < 8 || userKey.Length > 16)
                 {
-                    Decriptar(userKey);
-
-                    TempData["Sucesso"] = "Arquivo decriptado com sucesso!";
-                    return RedirectToAction("Index");
+                    TempData["Erro"] = "A senha do arquivo deve ter no mínimo 8 e no máximo 16 caracteres.";
+                    return RedirectToAction("Erro", "Home");
                 }
-                catch(Exception ex)
+                else
                 {
-                    TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
-                        "\n" + ex.Message + "\n" + ex.Data + "\n" + ex.StackTrace;
+                    for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
 
-                    return RedirectToAction("Erro");
+                    var archive = db.ArchiveUsersModels.Find(id);
+                    Download("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V", archive.hashFileName);
+
+                    try
+                    {
+                        Decriptar(userKey, id);
+
+                        TempData["Sucesso"] = "Arquivo decriptado com sucesso!";
+                        return RedirectToAction("Index");
+                    }
+                    catch(Exception ex)
+                    {
+                        TempData["Erro"] = "Ocorreu um erro.\nInfo para desenvolvedores: " + ex.HelpLink +
+                            "\n" + ex.Message + "\n" + ex.Data + "\n" + ex.StackTrace;
+
+                        return RedirectToAction("Erro", "Home");
+                    }
                 }
             }
+
+            return RedirectToAction("Index");
         }
 
         private int CloudCount()
@@ -393,7 +427,7 @@ namespace PEDRO.Controllers
                             var stream = new System.IO.MemoryStream();
                             request.Download(stream);
 
-                            using (FileStream f = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + i), FileMode.Create))
+                            using (FileStream f = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads/"), fileNameHash + i), FileMode.Create))
                             {
                                 stream.WriteTo(f);
                             }
@@ -409,17 +443,16 @@ namespace PEDRO.Controllers
                 {
                     byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + i));
                     recu.Write(bytes, 0, bytes.Length);
+                    System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + i));
                 }
             }
-
-            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + "0"));
-            System.IO.File.Delete(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + "1"));
         }
 
-        public void Decriptar(string userKey)
+        public void Decriptar(string userKey, int? id)
         {
+            var nome = db.ArchiveUsersModels.Find(id).nomeDoArquivo;
             var inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu");
-            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "decriptado");
+            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), nome);
 
             using (RijndaelManaged aes = new RijndaelManaged())
             {
