@@ -173,15 +173,12 @@ namespace PEDRO.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id")] ArchiveUsersModels archiveUsersModels)
+        public ActionResult Edit([Bind(Include = "id,nomeDoArquivo,dataUpload,hashFileName,servicosNuvem,tamanhoArquivo,tipoArquivo")] ArchiveUsersModels archiveUsersModels)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(archiveUsersModels).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(archiveUsersModels);
+            archiveUsersModels.user = db.Users.Find(User.Identity.GetUserId());
+            db.Entry(archiveUsersModels).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         
         public ActionResult Delete(int? id)

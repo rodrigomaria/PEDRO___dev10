@@ -266,6 +266,7 @@
     <Compile Include="Controllers\CloudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SharedArchiveModelController.cs" />
     <Compile Include="DriveUtils\GoogleDriveUtil.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -280,6 +281,7 @@
     <Compile Include="Models\CloudModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SharedArchiveModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -363,11 +365,6 @@
     <Content Include="Views\Home\Erro.cshtml" />
     <Content Include="Views\Home\Decriptar.cshtml" />
     <Content Include="Views\Home\Recuperar.cshtml" />
-    <Content Include="Views\Cloud\Create.cshtml" />
-    <Content Include="Views\Cloud\Delete.cshtml" />
-    <Content Include="Views\Cloud\Details.cshtml" />
-    <Content Include="Views\Cloud\Edit.cshtml" />
-    <Content Include="Views\Cloud\Index.cshtml" />
     <Content Include="Views\ArchiveUsersModels\Create.cshtml" />
     <Content Include="Views\ArchiveUsersModels\Delete.cshtml" />
     <Content Include="Views\ArchiveUsersModels\Details.cshtml" />
@@ -376,9 +373,12 @@
     <Content Include="Views\ArchiveUsersModels\Recuperar.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\SharedArchiveModel\Create.cshtml" />
+    <Content Include="Views\SharedArchiveModel\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\downloads\" />
+    <Folder Include="Views\SharedArchive\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

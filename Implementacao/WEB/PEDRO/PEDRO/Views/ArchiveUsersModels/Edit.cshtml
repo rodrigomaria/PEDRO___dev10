@@ -1,29 +1,36 @@
 ﻿@model PEDRO.Models.ArchiveUsersModels
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Renomear arquivo";
 }
-
-<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ArchiveUsersModels</h4>
+        <h4>Renomear arquivo</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.dataUpload)
+        @Html.HiddenFor(model => model.hashFileName)
+        @Html.HiddenFor(model => model.servicosNuvem)
+        @Html.HiddenFor(model => model.tamanhoArquivo)
+        @Html.HiddenFor(model => model.tipoArquivo)
+
+        <div class="form-group">
+            <dvi class="control-label col-md-2">Nome</dvi>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nomeDoArquivo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nomeDoArquivo, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Salvar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

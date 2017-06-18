@@ -42,7 +42,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.nomeDoArquivo)
+                @Html.DisplayFor(modelItem => item.nomeDoArquivo) 
+                <a href="@Url.Action("Edit", new { id = item.id })">
+                    <i class="glyphicon glyphicon-pencil" title="Renomear"></i>
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.tipoArquivo)
@@ -54,8 +57,12 @@
                 @Html.DisplayFor(modelItem => item.dataUpload)
             </td>
             <td>
-                @Html.ActionLink("Recuperar", "Recuperar", new { id = item.id }) |
-                @Html.ActionLink("Excluir", "Delete", new { id=item.id })
+                <a href="@Url.Action("Recuperar", new { id = item.id })">
+                    <i class="glyphicon glyphicon-download" title="Download"></i>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.id })">
+                    <i class="glyphicon glyphicon-trash" title="Excluir"></i>
+                </a>
             </td>
         </tr>
     }
