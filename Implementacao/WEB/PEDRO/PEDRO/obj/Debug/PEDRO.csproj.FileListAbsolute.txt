@@ -418,3 +418,4 @@ C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Mig
 C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csproj.GenerateResource.Cache
 C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.dll
 C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.pdb
+C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.compartilhamento.resources

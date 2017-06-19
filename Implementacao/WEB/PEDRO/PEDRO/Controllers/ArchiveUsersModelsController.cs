@@ -72,7 +72,20 @@ namespace PEDRO.Controllers
                     archives = archives.OrderBy(s => s.nomeDoArquivo);
                     break;
             }
+
             string id = User.Identity.GetUserId();
+
+            //List<ArchiveUsersModels> lista = new List<ArchiveUsersModels>();
+            //foreach(var arq in db.ArchiveUsersModels.ToList())
+            //{
+            //    if(id == arq.user.Id) { lista.Add(arq); }
+            //}
+            
+            //foreach(var s in db.SharedArchiveModels.ToList())
+            //{
+            //    if (id == s.usuario_id) { lista.Add(db.ArchiveUsersModels.Find(s.arquivo_id)); }
+            //}
+
             return View(archives.Where(am => am.user.Id == id).ToList());
         }
 
@@ -199,6 +212,45 @@ namespace PEDRO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ArchiveUsersModels archive = db.ArchiveUsersModels.Find(id);
+            string fileId = "";
+
+            UserCredential credential = GoogleWebAuthorizationBroker.AuthorizeAsync(new ClientSecrets
+            {
+                ClientId = "817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com",
+                ClientSecret = "DYSG6s8EYCfCwbkr8Oq5_j7V"
+            },
+            new string[] { DriveService.Scope.Drive, DriveService.Scope.DriveFile },
+            Environment.UserName,
+            CancellationToken.None,
+            new FileDataStore("Daimto.GoogleDrive.Auth.Store")).Result;
+
+            DriveService service = new DriveService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "Pedro"
+            });
+
+            int clouds = CloudCount();
+            FilesResource.ListRequest listResquest = service.Files.List();
+            listResquest.Q = "'root' in parents and trashed = false";
+            IList<Google.Apis.Drive.v2.Data.File> files = listResquest.Execute().Items;
+            if (files != null && files.Count > 0)
+            {
+                foreach (var file in files)
+                {
+                    for (int i = 0; i < clouds; i++)
+                    {
+                        if (file.Title.Equals(archive.hashFileName + i))
+                        {
+                            fileId = file.Id;
+                            service.Files.Delete(fileId).Execute();
+                            break;
+                        }
+                    }
+                }
+            }
+
             ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
             db.ArchiveUsersModels.Remove(archiveUsersModels);
             db.SaveChanges();
@@ -486,6 +538,51 @@ namespace PEDRO.Controllers
             }
 
             System.IO.File.Delete(inputFile);
+        }
+
+        public ActionResult Share(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
+            if (archiveUsersModels == null)
+            {
+                return HttpNotFound();
+            }
+            return View(archiveUsersModels);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Share(string email, int arquivoId)
+        {
+            if (email == null || email.Equals(""))
+            {
+                TempData["Erro"] = "Insira um e-mail de usuário.";
+                return RedirectToAction("Erro", "Home");
+            }
+
+            var user = db.Users.Where(u => u.Email == email).FirstOrDefault();
+
+            if (user == null)
+            {
+                TempData["Erro"] = "Usuário não encontrado.";
+                return RedirectToAction("Erro", "Home");
+            }
+
+            SharedArchiveModel shared = new SharedArchiveModel
+            {
+                proprietario_id = User.Identity.GetUserId(),
+                arquivo_id = arquivoId,
+                usuario_id = user.Id
+            };
+
+            db.SharedArchiveModels.Add(shared);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

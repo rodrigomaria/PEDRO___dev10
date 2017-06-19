@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Gerenciador de Arquivos";
+    PEDRO.Models.ApplicationDbContext db = new PEDRO.Models.ApplicationDbContext();
 }
 
 <p>
@@ -63,7 +64,57 @@
                 <a href="@Url.Action("Delete", new { id = item.id })">
                     <i class="glyphicon glyphicon-trash" title="Excluir"></i>
                 </a>
+                <a href="@Url.Action("Share", new { id = item.id })">
+                    <i class="glyphicon glyphicon-share" title="Compartilhar"></i>
+                </a>
             </td>
         </tr>
+    }
+</table>
+
+<table class="table">
+    @foreach (var s in db.SharedArchiveModels)
+    {
+        if (Model.ToList().FirstOrDefault().user.Id == s.usuario_id)
+        {
+            var arq = db.ArchiveUsersModels.Find(s.arquivo_id);
+            <tr>
+                <th>
+                    Nome do Arquivo
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Tamanho
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Opções
+                </th>
+            </tr>
+                    
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => arq.nomeDoArquivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => arq.tipoArquivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => arq.tamanhoArquivo) Kb
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => arq.dataUpload)
+                </td>
+                <td>
+                    <a href="@Url.Action("Recuperar", new { id = arq.id })">
+                        <i class="glyphicon glyphicon-download" title="Download"></i>
+                    </a>
+                </td>
+            </tr>
+        }
     }
 </table>

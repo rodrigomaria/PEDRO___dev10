@@ -51,5 +51,10 @@ namespace PEDRO.DriveUtils
                 request.Upload();
             }
         }
+
+        public void DeleteFile(String fileId)
+        {
+            service.Files.Delete(fileId).Execute();
+        }
     }
 }

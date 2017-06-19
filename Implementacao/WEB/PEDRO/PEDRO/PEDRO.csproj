@@ -266,7 +266,6 @@
     <Compile Include="Controllers\CloudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\SharedArchiveModelController.cs" />
     <Compile Include="DriveUtils\GoogleDriveUtil.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,6 +273,10 @@
     <Compile Include="Migrations\201705180130234_Initial.cs" />
     <Compile Include="Migrations\201705180130234_Initial.Designer.cs">
       <DependentUpon>201705180130234_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191054130_compartilhamento.cs" />
+    <Compile Include="Migrations\201706191054130_compartilhamento.Designer.cs">
+      <DependentUpon>201706191054130_compartilhamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -373,12 +376,10 @@
     <Content Include="Views\ArchiveUsersModels\Recuperar.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\SharedArchiveModel\Create.cshtml" />
-    <Content Include="Views\SharedArchiveModel\Delete.cshtml" />
+    <Content Include="Views\ArchiveUsersModels\Share.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\downloads\" />
-    <Folder Include="Views\SharedArchive\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -387,6 +388,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705180130234_Initial.resx">
       <DependentUpon>201705180130234_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191054130_compartilhamento.resx">
+      <DependentUpon>201706191054130_compartilhamento.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
