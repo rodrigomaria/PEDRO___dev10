@@ -52,7 +52,7 @@ namespace PEDRO.DriveUtils
             }
         }
 
-        public void DeleteFile(String fileId)
+        public void DeleteFile(string fileId)
         {
             service.Files.Delete(fileId).Execute();
         }

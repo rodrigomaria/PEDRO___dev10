@@ -3,13 +3,10 @@
 @{
     ViewBag.Title = "Gerenciador de Arquivos";
     PEDRO.Models.ApplicationDbContext db = new PEDRO.Models.ApplicationDbContext();
+    PEDRO.Models.ApplicationDbContext db2 = new PEDRO.Models.ApplicationDbContext();
 }
 
-<p>
-    <div class="btn btn-default">
-        @Html.ActionLink("Adicionar arquivo", "Create")
-    </div>
-</p>
+<h2 class="">Meus arquivos</h2>
 
 @using (Html.BeginForm())
 {
@@ -22,19 +19,19 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th class="col-md-5">
             @Html.ActionLink("Nome do Arquivo", "Index", new { sortOrder = ViewBag.NomeSortParm })
         </th>
         <th>
             @Html.ActionLink("Tipo", "Index", new { sortOrder = ViewBag.TipoSortParm })
         </th>
-        <th>
+        <th class="col-md-1">
             @Html.ActionLink("Tamanho", "Index", new { sortOrder = ViewBag.TamanhoSortParm })
         </th>
-        <th>
+        <th class="col-md-2">
             @Html.ActionLink("Data", "Index", new { sortOrder = ViewBag.DataSortParm })
         </th>
-        <th>
+        <th class="col-md-1">
             Opções
         </th>
     </tr>
@@ -72,45 +69,52 @@
     }
 </table>
 
+<p>
+    <div class="btn btn-default">
+        @Html.ActionLink("Adicionar arquivo", "Create")
+    </div>
+</p>
+
+<hr />
+<p>Arquivos compartilhados com você</p>
 <table class="table">
     @foreach (var s in db.SharedArchiveModels)
     {
-        if (Model.ToList().FirstOrDefault().user.Id == s.usuario_id)
+        if (Model.FirstOrDefault().user.Id == s.usuario_id)
         {
-            var arq = db.ArchiveUsersModels.Find(s.arquivo_id);
             <tr>
-                <th>
+                <th class="col-md-5">
                     Nome do Arquivo
                 </th>
                 <th>
                     Tipo
                 </th>
-                <th>
+                <th class="col-md-1">
                     Tamanho
                 </th>
-                <th>
+                <th class="col-md-2">
                     Data
                 </th>
-                <th>
+                <th class="col-md-1">
                     Opções
                 </th>
             </tr>
-                    
+
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => arq.nomeDoArquivo)
+                    @db2.ArchiveUsersModels.Find(s.arquivo_id).nomeDoArquivo
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => arq.tipoArquivo)
+                    @db2.ArchiveUsersModels.Find(s.arquivo_id).tipoArquivo
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => arq.tamanhoArquivo) Kb
+                    @db2.ArchiveUsersModels.Find(s.arquivo_id).tamanhoArquivo.ToString() Kb
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => arq.dataUpload)
+                    @db2.ArchiveUsersModels.Find(s.arquivo_id).dataUpload.ToString()
                 </td>
                 <td>
-                    <a href="@Url.Action("Recuperar", new { id = arq.id })">
+                    <a href="@Url.Action("Recuperar", new { id = db2.ArchiveUsersModels.Find(s.arquivo_id).id })">
                         <i class="glyphicon glyphicon-download" title="Download"></i>
                     </a>
                 </td>
