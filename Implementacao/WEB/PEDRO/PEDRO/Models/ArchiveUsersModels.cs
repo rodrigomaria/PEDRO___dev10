@@ -18,7 +18,7 @@ namespace PEDRO.Models
         public double tamanhoArquivo { get; set; }
         [Required]
         [Display(Name = "Tipo de Arquivo")]
-        public String tipoArquivo { get; set; }
+        public String extensao { get; set; }
         [Required]
         [Display(Name = "Data de upload")]
         public DateTime dataUpload { get; set; }

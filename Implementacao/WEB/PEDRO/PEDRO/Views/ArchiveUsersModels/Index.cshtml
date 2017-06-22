@@ -49,10 +49,10 @@
                 </a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tipoArquivo)
+                @Html.DisplayFor(modelItem => item.extensao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tamanhoArquivo) Kb
+                @Html.DisplayFor(modelItem => item.tamanhoArquivo) Kb                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dataUpload)
@@ -72,7 +72,7 @@
     }
 </table>
 
-<table class="table">
+@*<table class="table">
     @foreach (var s in db.SharedArchiveModels)
     {
         if (Model.ToList().FirstOrDefault().user.Id == s.usuario_id)
@@ -117,4 +117,4 @@
             </tr>
         }
     }
-</table>
+</table>*@

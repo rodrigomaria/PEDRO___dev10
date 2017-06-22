@@ -37,7 +37,7 @@ namespace PEDRO.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 archives = archives.Where(s => s.nomeDoArquivo.Contains(searchString)
-                                       || s.tipoArquivo.Contains(searchString)
+                                       || s.extensao.Contains(searchString)
                                        || s.tamanhoArquivo.ToString().Contains(searchString)
                                        || s.dataUpload.ToString().Contains(searchString));
             }
@@ -51,10 +51,10 @@ namespace PEDRO.Controllers
                     archives = archives.OrderByDescending(s => s.nomeDoArquivo);
                     break;
                 case "tipoArquivo_asc":
-                    archives = archives.OrderBy(s => s.tipoArquivo);
+                    archives = archives.OrderBy(s => s.extensao);
                     break;
                 case "tipoArquivo_desc":
-                    archives = archives.OrderByDescending(s => s.tipoArquivo);
+                    archives = archives.OrderByDescending(s => s.extensao);
                     break;
                 case "tamanhoArquivo_asc":
                     archives = archives.OrderBy(s => s.tamanhoArquivo);
@@ -130,11 +130,11 @@ namespace PEDRO.Controllers
                     for (int i = userKey.Length; i < 16; i++) { userKey = string.Concat(userKey, "0"); }
                 }
 
-                ArchiveUsersModels archive = new ArchiveUsersModels
+                ArchiveUsersModels archive = new ArchiveUsersModels           
                 {
-                    nomeDoArquivo = file.FileName,
+                    nomeDoArquivo = Path.GetFileNameWithoutExtension(file.FileName),
                     tamanhoArquivo = (file.ContentLength) / 1024,
-                    tipoArquivo = file.ContentType,
+                    extensao = Path.GetExtension(file.FileName),
                     dataUpload = DateTime.Now,
                     hashFileName = CreateNameFileSALT(file.FileName),
                     user = db.Users.Find(User.Identity.GetUserId())
@@ -186,7 +186,7 @@ namespace PEDRO.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nomeDoArquivo,dataUpload,hashFileName,servicosNuvem,tamanhoArquivo,tipoArquivo")] ArchiveUsersModels archiveUsersModels)
+        public ActionResult Edit([Bind(Include = "id,nomeDoArquivo,dataUpload,hashFileName,servicosNuvem,tamanhoArquivo,extensao")] ArchiveUsersModels archiveUsersModels)
         {
             archiveUsersModels.user = db.Users.Find(User.Identity.GetUserId());
             db.Entry(archiveUsersModels).State = EntityState.Modified;
@@ -305,32 +305,6 @@ namespace PEDRO.Controllers
                     }
                 }
             }
-        }
-
-        private string Encriptar(string fileName)
-        {
-            using (RijndaelManaged aes = new RijndaelManaged())
-            {
-                byte[] key = ASCIIEncoding.UTF8.GetBytes("chavedosbrothers");
-                byte[] IV = ASCIIEncoding.UTF8.GetBytes("chavedosbrothers");
-
-                byte[] cryptoPass = Encoding.Default.GetBytes(fileName);
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (ICryptoTransform encryptor = aes.CreateEncryptor(key, IV))
-                    {
-                        using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                        {
-                            cs.Write(cryptoPass, 0, cryptoPass.Length);
-                            cs.Close();
-                        }
-                        fileName = Encoding.Default.GetString(ms.ToArray());
-                    }
-                }
-            }
-
-            return fileName;
         }
 
         public ActionResult Recuperar()
@@ -511,8 +485,9 @@ namespace PEDRO.Controllers
         public void Decriptar(string userKey, int? id)
         {
             var nome = db.ArchiveUsersModels.Find(id).nomeDoArquivo;
+            var extensao = db.ArchiveUsersModels.Find(id).extensao;
             var inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu");
-            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), nome);
+            var outputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), nome + extensao);
 
             using (RijndaelManaged aes = new RijndaelManaged())
             {

@@ -278,6 +278,10 @@
     <Compile Include="Migrations\201706191054130_compartilhamento.Designer.cs">
       <DependentUpon>201706191054130_compartilhamento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706221206152_alterado campo tipo do arquivo para extensao.cs" />
+    <Compile Include="Migrations\201706221206152_alterado campo tipo do arquivo para extensao.Designer.cs">
+      <DependentUpon>201706221206152_alterado campo tipo do arquivo para extensao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ArchiveUsersModels.cs" />
@@ -391,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706191054130_compartilhamento.resx">
       <DependentUpon>201706191054130_compartilhamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706221206152_alterado campo tipo do arquivo para extensao.resx">
+      <DependentUpon>201706221206152_alterado campo tipo do arquivo para extensao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
