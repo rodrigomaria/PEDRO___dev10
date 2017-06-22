@@ -69,9 +69,6 @@
     }
 </table>
 
-<<<<<<< HEAD
-@*<table class="table">
-=======
 <p>
     <div class="btn btn-default">
         @Html.ActionLink("Adicionar arquivo", "Create")
@@ -81,7 +78,6 @@
 <hr />
 <p>Arquivos compartilhados com você</p>
 <table class="table">
->>>>>>> origin/master
     @foreach (var s in db.SharedArchiveModels)
     {
         if (Model.FirstOrDefault().user.Id == s.usuario_id)
@@ -109,7 +105,7 @@
                     @db2.ArchiveUsersModels.Find(s.arquivo_id).nomeDoArquivo
                 </td>
                 <td>
-                    @db2.ArchiveUsersModels.Find(s.arquivo_id).tipoArquivo
+                    @db2.ArchiveUsersModels.Find(s.arquivo_id).extensao
                 </td>
                 <td>
                     @db2.ArchiveUsersModels.Find(s.arquivo_id).tamanhoArquivo.ToString() Kb
@@ -125,4 +121,4 @@
             </tr>
         }
     }
-</table>*@
+</table>
