@@ -17,6 +17,7 @@ using System.Threading;
 using Google.Apis.Drive.v2;
 using Google.Apis.Util.Store;
 using Google.Apis.Services;
+using CG.Web.MegaApiClient;
 
 namespace PEDRO.Controllers
 {
@@ -231,6 +232,8 @@ namespace PEDRO.Controllers
                 ApplicationName = "Pedro"
             });
 
+            MegaUtil mega = new MegaUtil("", "");
+
             int clouds = CloudCount();
             FilesResource.ListRequest listResquest = service.Files.List();
             listResquest.Q = "'root' in parents and trashed = false";
@@ -239,16 +242,14 @@ namespace PEDRO.Controllers
             {
                 foreach (var file in files)
                 {
-                    for (int i = 0; i < clouds; i++)
+                    if (file.Title.Equals(archive.hashFileName + "0"))
                     {
-                        if (file.Title.Equals(archive.hashFileName + i))
-                        {
-                            fileId = file.Id;
-                            service.Files.Delete(fileId).Execute();
-                            break;
-                        }
+                        fileId = file.Id;
+                        service.Files.Delete(fileId).Execute();
                     }
                 }
+
+                mega.DeleteFile(archive.hashFileName + "1");
             }
 
             ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
@@ -384,19 +385,17 @@ namespace PEDRO.Controllers
         }
 
         private void Dividir(string fileNameHash)
-        {    
-            int numDeArqs = CloudCount();
-
+        {
             // pasta padrão
             var inputFile = Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash);
 
             //particiona arquivo por partes
             byte[] todosOsBytes = System.IO.File.ReadAllBytes(inputFile);
             int x = 0;
-            int fatia = todosOsBytes.Length / numDeArqs;
-            int sobra = todosOsBytes.Length % numDeArqs;
+            int fatia = todosOsBytes.Length / 2;
+            int sobra = todosOsBytes.Length % 2;
 
-            for (int i = 0; i < numDeArqs; i++)
+            for (int i = 0; i < 2; i++)
             {
                 string path = inputFile + "pt" + i;
                 string nome = "";
@@ -414,10 +413,18 @@ namespace PEDRO.Controllers
                     }
                     nome = fileNameHash + i;
                 }
-                
-                GoogleDriveUtil drive = new GoogleDriveUtil("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
-                drive.upload(path, nome);
 
+                if (i == 0)
+                {
+                    GoogleDriveUtil drive = new GoogleDriveUtil("817702798476-6p6jvc7mp4ehprtknj0v01ngmv8d6sks.apps.googleusercontent.com", "DYSG6s8EYCfCwbkr8Oq5_j7V");
+                    drive.upload(path, nome);
+                }
+                else
+                {
+                    MegaUtil mega = new MegaUtil("", "");
+                    mega.upload(path, nome);
+                }
+                
                 System.IO.File.Delete(path);
             }
             System.IO.File.Delete(inputFile);
@@ -443,6 +450,14 @@ namespace PEDRO.Controllers
                 ApplicationName = "Pedro"
             });
 
+            MegaApiClient client = new MegaApiClient();
+            client.Login(
+                "awmdsilva@restinga.ifrs.edu.br",
+                "96536976");
+
+            var nodes = client.GetNodes();
+            INode root = nodes.Single(n => n.Type == NodeType.Root);
+
             //lista
             int clouds = CloudCount();
             FilesResource.ListRequest listResquest = service.Files.List();
@@ -452,23 +467,23 @@ namespace PEDRO.Controllers
             {
                 foreach (var file in files)
                 {
-                    for(int i = 0; i < clouds; i++)
+                    if (file.Title.Equals(fileNameHash + "0"))
                     {
-                        if (file.Title.Equals(fileNameHash + i))
-                        {
-                            fileId = file.Id;
-                            var request = service.Files.Get(fileId);
-                            var stream = new System.IO.MemoryStream();
-                            request.Download(stream);
+                        fileId = file.Id;
+                        var request = service.Files.Get(fileId);
+                        var stream = new System.IO.MemoryStream();
+                        request.Download(stream);
 
-                            using (FileStream f = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads/"), fileNameHash + i), FileMode.Create))
-                            {
-                                stream.WriteTo(f);
-                            }
-                            break;
+                        using (FileStream f = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads/"), fileNameHash + "0"), FileMode.Create))
+                        {
+                            stream.WriteTo(f);
                         }
+                        break;
                     }
                 }
+
+                INode myFile = nodes.Single(n => n.Name == fileNameHash + "1");
+                client.DownloadFile(myFile, Path.Combine(Server.MapPath("~/App_Data/downloads/fileNameHash" + "1")));
             }
             
             using (FileStream recu = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu"), FileMode.Create))

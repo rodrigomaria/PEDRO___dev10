@@ -267,6 +267,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DriveUtils\GoogleDriveUtil.cs" />
+    <Compile Include="DriveUtils\MegaUtil.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
