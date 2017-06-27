@@ -29,9 +29,7 @@ namespace PEDRO.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<PEDRO.Models.CloudModel> CloudModels { get; set; }
-
+        
         public System.Data.Entity.DbSet<PEDRO.Models.ArchiveUsersModels> ArchiveUsersModels { get; set; }
 
         public System.Data.Entity.DbSet<PEDRO.Models.SharedArchiveModel> SharedArchiveModels { get; set; }

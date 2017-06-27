@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<PEDRO.Models.ArchiveUsersModels>
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Gerenciador de Arquivos";
@@ -64,6 +65,15 @@
                 <a href="@Url.Action("Share", new { id = item.id })">
                     <i class="glyphicon glyphicon-share" title="Compartilhar"></i>
                 </a>
+                @foreach (var shared in db.SharedArchiveModels)
+                {
+                    if (shared.arquivo_id == item.id)
+                    {
+                        <a href="@Url.Action("Unshare", new { id = item.id })">
+                            <i class="glyphicon glyphicon-remove" title="Descompartilhar"></i>
+                        </a>
+                    }
+                }
             </td>
         </tr>
     }
@@ -75,12 +85,16 @@
     </div>
 </p>
 
-<hr />
-<p>Arquivos compartilhados com você</p>
+@if (db.SharedArchiveModels.Where(s => s.usuario_id == User.Identity.GetUserId()) == null)
+{
+    <hr />
+    <p>Arquivos compartilhados com você</p>
+}
+
 <table class="table">
     @foreach (var s in db.SharedArchiveModels)
     {
-        if (Model.FirstOrDefault().user.Id == s.usuario_id)
+        if (User.Identity.GetUserId() == s.usuario_id)
         {
             <tr>
                 <th class="col-md-5">

@@ -115,12 +115,6 @@ namespace PEDRO.Controllers
         {
             if (file != null && file.ContentLength > 0 && ModelState.IsValid)
             {
-                if (!VerificaNuvens())
-                {
-                    TempData["Erro"] = "Você deve ter no mínimo um serviço de nuvens cadastrado.";
-                    return RedirectToAction("Erro", "Home");
-                }
-
                 if (userKey.Length < 8 || userKey.Length > 16)
                 {
                     TempData["Erro"] = "A senha do arquivo deve ter no mínimo 8 e no máximo 16 caracteres.";
@@ -233,8 +227,7 @@ namespace PEDRO.Controllers
             });
 
             MegaUtil mega = new MegaUtil("", "");
-
-            int clouds = CloudCount();
+            
             FilesResource.ListRequest listResquest = service.Files.List();
             listResquest.Q = "'root' in parents and trashed = false";
             IList<Google.Apis.Drive.v2.Data.File> files = listResquest.Execute().Items;
@@ -254,6 +247,13 @@ namespace PEDRO.Controllers
 
             ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
             db.ArchiveUsersModels.Remove(archiveUsersModels);
+
+            foreach(var item in db.SharedArchiveModels)
+            {
+                if (item.arquivo_id == id)
+                    db.SharedArchiveModels.Remove(item);
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -359,31 +359,7 @@ namespace PEDRO.Controllers
 
             return RedirectToAction("Index");
         }
-
-        private int CloudCount()
-        {
-            int c = 0;
-            foreach(var item in db.CloudModels.ToList())
-            {
-                if (item.user.Id == User.Identity.GetUserId())
-                    c++;
-            }
-
-            return c;
-        }
-
-        private bool VerificaNuvens()
-        {
-            var nuvens = db.CloudModels.ToList();
-            foreach(var item in nuvens)
-            {
-                if(item.user.Id == User.Identity.GetUserId())
-                    return true;
-            }
-
-            return false;
-        }
-
+        
         private void Dividir(string fileNameHash)
         {
             // pasta padrão
@@ -397,7 +373,7 @@ namespace PEDRO.Controllers
 
             for (int i = 0; i < 2; i++)
             {
-                string path = inputFile + "pt" + i;
+                string path = inputFile + i;
                 string nome = "";
                 using (FileStream file = new FileStream(path, FileMode.Create))
                 {
@@ -459,7 +435,6 @@ namespace PEDRO.Controllers
             INode root = nodes.Single(n => n.Type == NodeType.Root);
 
             //lista
-            int clouds = CloudCount();
             FilesResource.ListRequest listResquest = service.Files.List();
             listResquest.Q = "'root' in parents and trashed = false";
             IList<Google.Apis.Drive.v2.Data.File> files = listResquest.Execute().Items;
@@ -483,12 +458,12 @@ namespace PEDRO.Controllers
                 }
 
                 INode myFile = nodes.Single(n => n.Name == fileNameHash + "1");
-                client.DownloadFile(myFile, Path.Combine(Server.MapPath("~/App_Data/downloads/fileNameHash" + "1")));
+                client.DownloadFile(myFile, Path.Combine(Server.MapPath("~/App_Data/downloads/" + fileNameHash + "1")));
             }
             
             using (FileStream recu = new FileStream(Path.Combine(Server.MapPath("~/App_Data/downloads"), "recu"), FileMode.Create))
             {
-                for (int i = 0; i < clouds; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     byte[] bytes = System.IO.File.ReadAllBytes(Path.Combine(Server.MapPath("~/App_Data/downloads"), fileNameHash + i));
                     recu.Write(bytes, 0, bytes.Length);
@@ -570,6 +545,36 @@ namespace PEDRO.Controllers
             };
 
             db.SharedArchiveModels.Add(shared);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Unshare(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ArchiveUsersModels archiveUsersModels = db.ArchiveUsersModels.Find(id);
+            if (archiveUsersModels == null)
+            {
+                return HttpNotFound();
+            }
+            return View(archiveUsersModels);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Unshare(int arquivoId)
+        {
+            var shared = db.SharedArchiveModels.Where(s => s.arquivo_id == arquivoId);
+
+            foreach(var item in shared)
+            {
+                db.SharedArchiveModels.Remove(item);
+            }
+            
             db.SaveChanges();
 
             return RedirectToAction("Index");

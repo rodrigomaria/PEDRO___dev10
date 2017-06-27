@@ -1,0 +1,24 @@
+﻿@model PEDRO.Models.ArchiveUsersModels
+
+@{
+    ViewBag.Title = "Descompartilhar arquivo";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h2>@ViewBag.Title</h2>
+
+    <input type="hidden" id="arquivoId" name="arquivoId" value="@Model.id" />
+
+    <h3>Você tem certeza que deseja encerrar o compartilhamento desse arquivo?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal"></dl>
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirmar" class="btn btn-default" />
+            @Html.ActionLink("Voltar para Arquivos", "Index")
+        </div>
+    </div>
+}
