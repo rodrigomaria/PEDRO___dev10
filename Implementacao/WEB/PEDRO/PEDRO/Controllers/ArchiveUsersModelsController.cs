@@ -428,8 +428,8 @@ namespace PEDRO.Controllers
 
             MegaApiClient client = new MegaApiClient();
             client.Login(
-                "awmdsilva@restinga.ifrs.edu.br",
-                "96536976");
+                "nuvem.pedro@gmail.com",
+                "pedroehdemais");
 
             var nodes = client.GetNodes();
             INode root = nodes.Single(n => n.Type == NodeType.Root);

@@ -77,7 +77,7 @@ namespace PEDRO.Controllers
 
             if (!UserManager.IsEmailConfirmed(userid))
             {
-                ModelState.AddModelError("", "Usuário/senha incorretos ou conta não confirmada.");
+                ModelState.AddModelError("", "Conta não confirmada.");
                 return View(model);
             }
 
@@ -94,7 +94,7 @@ namespace PEDRO.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Usuário/senha incorretos ou conta não confirmada.");
+                    ModelState.AddModelError("", "Usuário/senha incorretos.");
                     return View(model);
             }
         }

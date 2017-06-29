@@ -19,8 +19,8 @@ namespace PEDRO.DriveUtils
             {
                 client = new MegaApiClient();
                 client.Login(
-                    "awmdsilva@restinga.ifrs.edu.br",
-                    "96536976");
+                    "nuvem.pedro@gmail.com",
+                    "pedroehdemais");
                 nodes = client.GetNodes();
                 root = nodes.Single(n => n.Type == NodeType.Root);
             }

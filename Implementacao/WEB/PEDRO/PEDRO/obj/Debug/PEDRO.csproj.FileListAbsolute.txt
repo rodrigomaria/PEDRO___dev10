@@ -424,3 +424,5 @@ C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.csproj.GenerateResource.Cache
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.dll
 C:\Users\Rodrigo Maria\Documents\GitHub\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.pdb
+C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.alteradocampotipodoarquivoparaextensao.resources
+C:\Users\Ayres\Downloads\Dev10\Implementacao\WEB\PEDRO\PEDRO\obj\Debug\PEDRO.Migrations.remocaocloudmodels.resources
